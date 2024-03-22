@@ -111,4 +111,10 @@ public class AddClubController {
         }
     }
 
+    @FXML
+    private void handleSaveAndLoadClubScene(ActionEvent event) {
+        handleSaveAction(event);
+        loadClubScene();
+    }
+
 }

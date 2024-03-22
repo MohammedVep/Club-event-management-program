@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.clubeventmanagementprogram.controller.clubActions.AddClubController">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.clubeventmanagementprogram.controller.clubActions.EditClubController">
     <Label text="Club Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
     <TextField fx:id="clubNameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
@@ -18,4 +18,5 @@
 
     <Button text="Save" onAction="#handleSaveAndLoadClubScene" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
     <Button fx:id="cancelButton" onAction="#loadClubScene" text="Cancel" layoutX="20" layoutY="20"/>
+
 </GridPane>

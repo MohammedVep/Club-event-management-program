@@ -101,4 +101,10 @@ public class EditClubController{
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleSaveAndLoadClubScene(ActionEvent event) {
+        handleSaveAction(event);
+        loadClubScene();
+    }
 }

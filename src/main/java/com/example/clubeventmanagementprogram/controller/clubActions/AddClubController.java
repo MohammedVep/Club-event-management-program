@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.collections.ObservableList;
@@ -29,6 +30,26 @@ public class AddClubController {
     private ObservableList<Club> clubs;
     @FXML
     private TextArea topicsArea;
+
+    @FXML
+    Button addButton;
+
+    @FXML
+    Button cancelButton;
+
+    @FXML
+    public void initialize() {
+        // Cancel button action
+        cancelButton.setOnAction(event -> {
+            loadClubScene();
+        });
+
+        // Save button action
+        addButton.setOnAction(event -> {
+            handleSaveAction(event);
+            loadClubScene();
+        });
+    }
 
     public AddClubController(ObservableList<Club> clubs) {
         this.clubs = clubs;
@@ -69,4 +90,25 @@ public class AddClubController {
         }
 
     }
+    @FXML
+    private void loadClubScene() {
+        try {
+            // Load Club scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/club.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene and load it to the stage
+            Scene scene = new Scene(root);
+
+            // Getting the current stage
+            Stage stage = (Stage) cancelButton.getScene().getWindow();
+
+            // Setting the new scene to the stage
+            stage.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

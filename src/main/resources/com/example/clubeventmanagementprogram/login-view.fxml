@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.LoginController">
+    <Label text="Login Form"/>
+    <GridPane alignment="CENTER">
+        <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="Username:"/>
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <TextField fx:id="usernameField" />
+        </HBox>
+
+        <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <Label text="Password:"/>
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <PasswordField fx:id="passwordField" />
+        </HBox>
+    </GridPane>
+
+    <Button fx:id="submitButton" text="Submit"/>
+</VBox>

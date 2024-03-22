@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.ClubController">
+    <children>
+        <Label fx:id="userLabel" layoutX="10.0" layoutY="10.0" text="User"/>
+        <Label fx:id="titleLabel" layoutX="275.0" layoutY="10.0" text="Manage clubs"/>
+        <Button fx:id="logoutButton" layoutX="560.0" layoutY="5.0" mnemonicParsing="false" text="Logout" onAction="#handleLogout"/>
+
+        <TableView fx:id="clubTable" editable="true" layoutX="14.0" layoutY="40.0" prefHeight="346.0" prefWidth="572.0">
+            <columns>
+                <TableColumn fx:id="clubName" prefWidth="150.0" text="Club name" />
+                <TableColumn fx:id="clubDescription" prefWidth="200.0" text="Club Description" />
+                <TableColumn fx:id="clubTopics" prefWidth="150.0" text="Topics" />
+                <TableColumn fx:id="clubDateAdded" prefWidth="100.0" text="Date Added" />
+            </columns>
+        </TableView>
+        <Button layoutX="450.0" layoutY="320.0" mnemonicParsing="false" text="Add Club" onAction="#handleAddClub" />
+        <Button layoutX="350.0" layoutY="320.0" mnemonicParsing="false" text="Delete Club" onAction="#handleDeleteClub" />
+    </children>
+</AnchorPane>

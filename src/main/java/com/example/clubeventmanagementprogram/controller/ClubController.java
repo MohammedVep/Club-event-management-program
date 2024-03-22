@@ -67,8 +67,8 @@ public class ClubController {
 
         // Set up add, edit, and delete buttons
         addButton.setOnAction(event -> handleAddClub(event));
-        editButton.setOnAction(event -> handleEditClub());
-        deleteButton.setOnAction(event -> handleDeleteClub());
+        editButton.setOnAction(event -> handleEditClub(event));
+        deleteButton.setOnAction(event -> handleDeleteClub(event));
 
         // Set up table columns to pull data from Club objects - replace methods with your getters
         clubNameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
@@ -110,23 +110,47 @@ public class ClubController {
             Scene addClubScene = new Scene(addClubRoot);
 
             // Get the current stage and set the scene to add-club
-            Stage currentStage = (Stage) source.getScene().getWindow(); // assuming clubNameField is valid in this context
+            Stage currentStage = (Stage) source.getScene().getWindow();
             currentStage.setScene(addClubScene);
 
         } catch(IOException e) {
             // handle the exception (print stack trace or show an alert here)
-            System.err.println("Error loading add-club.fxml");
+            System.err.println("Error loading Add Club page");
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void handleEditClub() {
-        // Code to switch to EditClubController view...
+    private void handleEditClub(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        try {
+            // Load the edit-club view
+            Parent editClubRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/edit-club.fxml"));
+            Scene editClubScene = new Scene(editClubRoot);
+
+            // Get the current stage and set the scene to edit-club
+            Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setScene(editClubScene);
+        } catch(IOException e){
+            System.err.println("Error loading Edit Club page");
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void handleDeleteClub() {
-        // Code to switch to DeleteClubController view...
+    private void handleDeleteClub(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        try {
+            // Load the delete-club view
+            Parent deleteClubRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/delete-club.fxml"));
+            Scene deleteClubScene = new Scene(deleteClubRoot);
+
+            // Get the current stage and set the scene to delete-club
+            Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setScene(deleteClubScene);
+        } catch(IOException e){
+            System.err.println("Error loading Delete Club page");
+            e.printStackTrace();
+        }
     }
 }

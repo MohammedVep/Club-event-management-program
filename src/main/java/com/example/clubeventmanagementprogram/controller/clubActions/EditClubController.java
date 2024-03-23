@@ -50,7 +50,6 @@ public class EditClubController{
         // Save button action
         editButton.setOnAction(event -> {
             handleSaveAction(event);
-            loadClubScene();
         });
     }
 

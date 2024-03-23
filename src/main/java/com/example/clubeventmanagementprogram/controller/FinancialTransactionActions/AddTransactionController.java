@@ -47,7 +47,7 @@ public class AddTransactionController {
     public void initialize() {
         // Cancel button action
         cancelButton.setOnAction(event -> {
-            loadClubScene();
+            loadTransactionScene();
         });
 
         // Save button action
@@ -74,11 +74,11 @@ public class AddTransactionController {
             newTransaction.setFinancial_id(financialTransactionId);
             FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDao);
             financialTransactionService.addTransaction(newTransaction);
-            // Load the clubs view
+            // Load the Transaction view
             Parent transactionViewRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/financial-view.fxml"));
             Scene transactionViewScene = new Scene(transactionViewRoot);
 
-            // Get the current Stage and set the scene to clubs view
+            // Get the current Stage and set the scene to Transaction view
             Stage currentStage = (Stage) addButton.getScene().getWindow();
             currentStage.setScene(transactionViewScene);
         } catch (IOException e){
@@ -87,7 +87,7 @@ public class AddTransactionController {
     }
 
     @FXML
-    private void loadClubScene() {
+    private void loadTransactionScene() {
         try {
             // Load Club scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/financial-view.fxml"));

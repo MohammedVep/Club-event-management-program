@@ -93,14 +93,14 @@ public class HomeController {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(scene);
 
-                // (Optional) set the new window title
+                // set the new window title
                 stage.setTitle("Manage Clubs");
 
                 // Show the new scene
                 stage.show();
 
             } catch (IOException e) {
-                System.err.println("Failed to load the club scene.");
+                System.err.println("Failed to load Manage Clubs Page.");
                 e.printStackTrace();
             }
         });
@@ -114,7 +114,26 @@ public class HomeController {
         });
 
         financialButton.setOnAction(event -> {
-            // Load Financial scene
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/financial-view.fxml"));
+                Parent root = loader.load();
+                // Create a new scene
+                Scene scene = new Scene(root, 600, 400); // you can specify preferred scene dimensions (e.g., 600x400 here)
+
+                // Get current stage and set the new scene onto it
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+
+                // set the new window title
+                stage.setTitle("Manage Financial Transactions");
+
+                // Show the new scene
+                stage.show();
+
+            } catch (IOException e){
+                System.err.println("Failed to load Manage Financial Transactions Page");
+                e.printStackTrace();
+            }
         });
 
         usersButton.setOnAction(event -> {

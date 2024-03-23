@@ -95,14 +95,50 @@ public class FinancialTransactionController {
 
     @FXML
     private void handleAddFinancialTransaction(ActionEvent event){
-        // Code to work later
+        Node source = (Node) event.getSource();
+        try {
+            // Load the add-transaction view
+            Parent addFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/add-transaction.fxml"));
+            Scene addFinancialTransactionScene = new Scene(addFinancialTransactionRoot);
+
+            // Get the current stage and set the scene to add-transaction
+            Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setScene(addFinancialTransactionScene);
+
+        } catch(IOException e) {
+            // handle the exception (print stack trace or show an alert here)
+            System.err.println("Error loading Add Financial Transaction page");
+            e.printStackTrace();
+        }
     }
     @FXML
     private void handleEditFinancialTransaction(ActionEvent event){
-        // Code to work later
+        Node source = (Node) event.getSource();
+        try {
+            Parent editFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/edit-transaction.fxml"));
+            Scene editFinancialTransactionScene = new Scene(editFinancialTransactionRoot);
+
+            Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setScene(editFinancialTransactionScene);
+
+        } catch(IOException e){
+            System.err.println("Error loading Edit Financial Transaction page");
+            e.printStackTrace();
+        }
     }
     @FXML
     private void handleDeleteFinancialTransaction(ActionEvent event){
-        // Code to work later
+        Node source = (Node) event.getSource();
+        try {
+            Parent deletedFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/delete-transaction.fxml"));
+            Scene deleteFinancialTransactionScene = new Scene(deletedFinancialTransactionRoot);
+
+            Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setScene(deleteFinancialTransactionScene);
+
+        } catch(IOException e){
+            System.err.println("Error loading Delete Club page");
+            e.printStackTrace();
+        }
     }
 }

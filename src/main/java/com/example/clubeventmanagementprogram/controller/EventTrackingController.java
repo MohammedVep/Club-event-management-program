@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class EventTrackingController {
-    private final String URL;
-    private final String USERNAME;
-    private final String PASSWORD;
+    private String URL = "jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres";
+    private String USERNAME = "edb_admin";
+    private String PASSWORD = "Rlo:On)YMYtL%Ob";
 
     public EventTrackingController(String dbUrl, String dbUsername, String dbPassword) {
         this.URL = dbUrl;

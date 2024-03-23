@@ -17,8 +17,8 @@
                 <TableColumn fx:id="clubDateAdded" prefWidth="100.0" text="Date Added" />
             </columns>
         </TableView>
-        <Button layoutX="350.0" layoutY="320.0" mnemonicParsing="false" text="Add Club" onAction="#handleAddClub" />
-        <Button layoutX="400.0" layoutY="320.0" mnemonicParsing="false" text="Edit Club" onAction="#handleEditClub" />
+        <Button layoutX="100.0" layoutY="320.0" mnemonicParsing="false" text="Add Club" onAction="#handleAddClub" />
+        <Button layoutX="300.0" layoutY="320.0" mnemonicParsing="false" text="Edit Club" onAction="#handleEditClub" />
         <Button layoutX="450.0" layoutY="320.0" mnemonicParsing="false" text="Delete Club" onAction="#handleDeleteClub" />
     </children>
 </AnchorPane>

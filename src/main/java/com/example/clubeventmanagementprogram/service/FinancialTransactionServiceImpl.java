@@ -6,6 +6,11 @@ import java.util.List;
 
 public class FinancialTransactionServiceImpl implements FinancialTransactionService{
     private FinancialTransactionDAO financialTransactionDAO;
+
+    public FinancialTransactionServiceImpl(FinancialTransactionDAO financialTransactionDAO) {
+        this.financialTransactionDAO = financialTransactionDAO;
+    }
+
     @Override
     public void addTransaction(FinancialTransaction transaction) {
         financialTransactionDAO.addTransaction(transaction);

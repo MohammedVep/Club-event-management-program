@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.clubeventmanagementprogram.FinancialView"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.FinancialTransactionController">
+    <children>
+        <Label fx:id="usernameLabel" layoutX="10.0" layoutY="10.0" text="User"/>
+        <Label fx:id="manageFinancialTransactionsLabel" layoutX="275.0" layoutY="10.0" text="Manage Financial Transaction"/>
+        <Button fx:id="logoutButton" layoutX="560.0" layoutY="5.0" mnemonicParsing="false" text="Logout" onAction="#handleLogout"/>
 
+        <TableView fx:id="financialTransactionTableView" editable="true" layoutX="14.0" layoutY="40.0" prefHeight="346.0" prefWidth="572.0">
+            <columns>
+                <TableColumn fx:id="transactionNameColumn" prefWidth="150.0" text="Transaction name" />
+                <TableColumn fx:id="descriptionColumn" prefWidth="200.0" text="Transaction Description" />
+                <TableColumn fx:id="dateColumn" prefWidth="150.0" text="Transaction Date" />
+                <TableColumn fx:id="transactionAmountColumn" prefWidth="100.0" text="Cost" />
+            </columns>
+        </TableView>
+        <Button layoutX="10.0" layoutY="320.0" mnemonicParsing="false" text="Add Financial Transaction" onAction="#handleAddFinancialTransaction" />
+        <Button layoutX="300.0" layoutY="320.0" mnemonicParsing="false" text="Edit Financial Transaction" onAction="#handleEditFinancialTransaction" />
+        <Button layoutX="450.0" layoutY="320.0" mnemonicParsing="false" text="Delete Financial Transaction" onAction="#handleDeleteFinancialTransaction" />
+    </children>
 </AnchorPane>

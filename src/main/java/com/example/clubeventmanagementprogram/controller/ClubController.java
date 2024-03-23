@@ -70,7 +70,7 @@ public class ClubController {
         editButton.setOnAction(event -> handleEditClub(event));
         deleteButton.setOnAction(event -> handleDeleteClub(event));
 
-        // Set up table columns to pull data from Club objects - replace methods with your getters
+        // Set up table columns to pull data from Club objects
         clubNameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
         checkboxColumn.setCellValueFactory(new PropertyValueFactory<>("checkbox"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));

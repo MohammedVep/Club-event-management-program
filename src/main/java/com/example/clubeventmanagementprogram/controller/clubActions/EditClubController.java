@@ -75,7 +75,7 @@ public class EditClubController{
             Scene clubsViewScene = new Scene(clubsViewRoot);
 
             // Get the current Stage and set the scene to clubs view
-            Stage currentStage = (Stage) clubNameField.getScene().getWindow();
+            Stage currentStage = (Stage) editButton.getScene().getWindow();
             currentStage.setScene(clubsViewScene);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -85,7 +85,7 @@ public class EditClubController{
     private void loadClubScene() {
         try {
             // Load Club scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/club.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/clubs-view.fxml"));
             Parent root = loader.load();
 
             // Create a new scene and load it to the stage

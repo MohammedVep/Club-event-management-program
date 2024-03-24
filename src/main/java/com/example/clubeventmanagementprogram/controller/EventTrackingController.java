@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class EventTrackingController {
     private String URL = "jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres";
@@ -17,14 +19,15 @@ public class EventTrackingController {
         this.PASSWORD = dbPassword;
     }
 
-    public void trackEvent(String eventName, int userId, String eventData) {
+    public void trackEvent(String eventName, String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             String sql = "INSERT INTO events (eventName, description, date, startTime, endTime) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, eventName);
-                statement.setInt(2, userId);
-                statement.setString(3, eventData);
-                statement.setObject(4, LocalDateTime.now());
+                statement.setString(2, description);
+                statement.setDate(3, java.sql.Date.valueOf(date));
+                statement.setTime(4, java.sql.Time.valueOf(startTime));
+                statement.setTime(5, java.sql.Time.valueOf(endTime));
 
                 statement.executeUpdate();
                 System.out.println("Event tracked successfully.");
@@ -44,7 +47,7 @@ public class EventTrackingController {
         // Example usage:
         int userId = 123;
         String eventData = "{\"page\": \"homepage\", \"action\": \"click_button\"}";
-        controller.trackEvent("user_interaction", userId, eventData);
+
     }
 }
 

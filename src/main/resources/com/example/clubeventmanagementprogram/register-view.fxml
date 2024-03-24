@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/"
+      fx:controller="com.example.clubeventmanagementprogram.controller.RegistrationController">
+    <padding>
+        <Insets top="50" right="50" bottom="50" left="50"/>
+    </padding>
+    <TextField fx:id="usernameField" promptText="Username"/>
+    <TextField fx:id="passwordField" promptText="Password"/>
+    <TextField fx:id="emailField" promptText="Email"/>
+    <Button fx:id="registerButton" text="Register"/>
+</VBox>

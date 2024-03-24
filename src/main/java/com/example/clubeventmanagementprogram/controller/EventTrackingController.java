@@ -19,7 +19,7 @@ public class EventTrackingController {
 
     public void trackEvent(String eventName, int userId, String eventData) {
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            String sql = "INSERT INTO events (event_name, user_id, event_data, created_at) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO events (eventName, description, date, startTime, endTime) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, eventName);
                 statement.setInt(2, userId);

@@ -10,6 +10,8 @@ module com.example.clubeventmanagementprogram {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires kernel;
+    requires layout;
 
     opens com.example.clubeventmanagementprogram to javafx.fxml;
     exports com.example.clubeventmanagementprogram.application;

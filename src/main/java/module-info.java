@@ -12,6 +12,7 @@ module com.example.clubeventmanagementprogram {
     requires java.sql;
     requires kernel;
     requires layout;
+    requires org.apache.pdfbox;
 
     opens com.example.clubeventmanagementprogram to javafx.fxml;
     exports com.example.clubeventmanagementprogram.application;

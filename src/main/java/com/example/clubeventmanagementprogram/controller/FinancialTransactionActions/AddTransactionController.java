@@ -75,7 +75,7 @@ public class AddTransactionController {
             FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDao);
             financialTransactionService.addTransaction(newTransaction);
             // Load the Transaction view
-            Parent transactionViewRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/financial-view.fxml"));
+            Parent transactionViewRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/financial-view.fxml"));
             Scene transactionViewScene = new Scene(transactionViewRoot);
 
             // Get the current Stage and set the scene to Transaction view
@@ -90,7 +90,7 @@ public class AddTransactionController {
     private void loadTransactionScene() {
         try {
             // Load Club scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/financial-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/financial-view.fxml"));
             Parent root = loader.load();
 
             // Create a new scene and load it to the stage

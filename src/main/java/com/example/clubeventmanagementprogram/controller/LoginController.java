@@ -35,7 +35,7 @@ public class LoginController {
                 try {
                     // Load the home screen's FXML file.
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/home-view.fxml")); // Replace with the path to your FXML file.
+                    loader.setLocation(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
                     Parent homeSceneParent = loader.load();
                     Scene homeScene = new Scene(homeSceneParent);
 
@@ -64,7 +64,7 @@ public class LoginController {
             try {
                 // Load the Register screen's FXML file.
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/register-view.fxml"));
+                loader.setLocation(getClass().getResource("/com/example/clubeventmanagementprogram/register-view.fxml"));
                 Parent registerSceneParent = loader.load();
                 Scene registerScene = new Scene(registerSceneParent);
 

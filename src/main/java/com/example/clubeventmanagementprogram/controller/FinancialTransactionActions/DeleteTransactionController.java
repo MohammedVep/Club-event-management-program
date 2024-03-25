@@ -40,7 +40,7 @@ public class DeleteTransactionController {
             financialTransactionService.deleteTransaction(selectedFinancialTransaction.getFinancial_id());
             financialTransactionsTable.getItems().remove(selectedFinancialTransaction);
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/financial-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/financial-view.fxml"));
                 Parent financialViewRoot = loader.load();
                 Scene financialViewScene = new Scene(financialViewRoot);
 
@@ -58,7 +58,7 @@ public class DeleteTransactionController {
     @FXML
     private void loadFinancialTransactionScene() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/financial-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/financial-view.fxml"));
             Parent financialViewRoot = loader.load();
             Scene financialViewScene = new Scene(financialViewRoot);
 

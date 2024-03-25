@@ -80,7 +80,7 @@ public class FinancialTransactionController {
         Stage currentStage;
         try {
             // Load the login screen
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/login-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/login-view.fxml"));
             Scene loginScene = new Scene(fxmlLoader.load());
 
             // Get the current stage
@@ -98,7 +98,7 @@ public class FinancialTransactionController {
         Node source = (Node) event.getSource();
         try {
             // Load the add-transaction view
-            Parent addFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/add-transaction.fxml"));
+            Parent addFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/add-transaction.fxml"));
             Scene addFinancialTransactionScene = new Scene(addFinancialTransactionRoot);
 
             // Get the current stage and set the scene to add-transaction
@@ -115,7 +115,7 @@ public class FinancialTransactionController {
     private void handleEditFinancialTransaction(ActionEvent event){
         Node source = (Node) event.getSource();
         try {
-            Parent editFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/edit-transaction.fxml"));
+            Parent editFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/edit-transaction.fxml"));
             Scene editFinancialTransactionScene = new Scene(editFinancialTransactionRoot);
 
             Stage currentStage = (Stage) source.getScene().getWindow();
@@ -130,7 +130,7 @@ public class FinancialTransactionController {
     private void handleDeleteFinancialTransaction(ActionEvent event){
         Node source = (Node) event.getSource();
         try {
-            Parent deletedFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/delete-transaction.fxml"));
+            Parent deletedFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/delete-transaction.fxml"));
             Scene deleteFinancialTransactionScene = new Scene(deletedFinancialTransactionRoot);
 
             Stage currentStage = (Stage) source.getScene().getWindow();

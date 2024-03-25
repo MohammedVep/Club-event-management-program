@@ -41,7 +41,7 @@ public class DeleteClubController {
             clubsTable.getItems().remove(selectedClub);
             try {
                 // Load the clubs view
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/clubs-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/clubs-view.fxml"));
                 Parent clubsViewRoot = loader.load();
                 Scene clubsViewScene = new Scene(clubsViewRoot);
 
@@ -59,7 +59,7 @@ public class DeleteClubController {
     private void loadClubScene() {
         try {
             // Load Club scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/clubs-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/clubs-view.fxml"));
             Parent root = loader.load();
 
             // Create a new scene and load it to the stage

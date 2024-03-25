@@ -89,7 +89,7 @@ public class ClubController {
         Stage currentStage;
         try {
             // Load the login screen
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/login-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/login-view.fxml"));
             Scene loginScene = new Scene(fxmlLoader.load());
 
             // Get the current stage
@@ -106,7 +106,7 @@ public class ClubController {
         Node source = (Node) event.getSource();
         try {
             // Load the add-club view
-            Parent addClubRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/add-club.fxml"));
+            Parent addClubRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/add-club.fxml"));
             Scene addClubScene = new Scene(addClubRoot);
 
             // Get the current stage and set the scene to add-club
@@ -125,7 +125,7 @@ public class ClubController {
         Node source = (Node) event.getSource();
         try {
             // Load the edit-club view
-            Parent editClubRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/edit-club.fxml"));
+            Parent editClubRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/edit-club.fxml"));
             Scene editClubScene = new Scene(editClubRoot);
 
             // Get the current stage and set the scene to edit-club
@@ -142,7 +142,7 @@ public class ClubController {
         Node source = (Node) event.getSource();
         try {
             // Load the delete-club view
-            Parent deleteClubRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/delete-club.fxml"));
+            Parent deleteClubRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/delete-club.fxml"));
             Scene deleteClubScene = new Scene(deleteClubRoot);
 
             // Get the current stage and set the scene to delete-club

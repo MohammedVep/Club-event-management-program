@@ -33,7 +33,10 @@ public class RegistrationController {
     @FXML
     private Button registerButton;
 
-    public RegistrationController(UserService userService) {
+    public RegistrationController() {
+
+    }
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
@@ -59,7 +62,7 @@ public class RegistrationController {
             showMessage("Registration successful!");
             // Clear the input fields or navigate to another screen
             // Load Home page view
-            Parent homePageParent = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/home-view.fxml"));
+            Parent homePageParent = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
             Scene homePageScene = new Scene(homePageParent);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);

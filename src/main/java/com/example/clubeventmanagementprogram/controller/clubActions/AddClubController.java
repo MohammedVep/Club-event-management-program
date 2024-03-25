@@ -77,7 +77,7 @@ public class AddClubController {
             clubService.addClub(newClub);
 
             // Load the clubs view
-            Parent clubsViewRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/clubs-view.fxml"));
+            Parent clubsViewRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/clubs-view.fxml"));
             Scene clubsViewScene = new Scene(clubsViewRoot);
 
             // Get the current Stage and set the scene to clubs view
@@ -93,7 +93,7 @@ public class AddClubController {
     private void loadClubScene() {
         try {
             // Load Club scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/clubs-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/clubs-view.fxml"));
             Parent root = loader.load();
 
             // Create a new scene and load it to the stage

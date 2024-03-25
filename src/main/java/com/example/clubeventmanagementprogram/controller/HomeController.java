@@ -26,7 +26,7 @@ public class HomeController {
     public static int getUserId(String username) {
         String getUserIdQuery = "SELECT user_id FROM users WHERE username = ?";
         int userId = -1; // default to an invalid ID
-        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "password_here");
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres", "postgres", "password_here");
              PreparedStatement getUserIdStmt = conn.prepareStatement(getUserIdQuery)) {
 
             getUserIdStmt.setString(1, username);
@@ -66,7 +66,7 @@ public class HomeController {
 
                 // Load login screen's FXML file
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/login-view.fxml")); // Replace with the path to your login FXML file
+                loader.setLocation(getClass().getResource("/com/example/clubeventmanagementprogram/login-view.fxml")); // Replace with the path to your login FXML file
                 Parent loginSceneParent = loader.load();
                 Scene loginScene = new Scene(loginSceneParent);
 
@@ -83,7 +83,7 @@ public class HomeController {
         clubsButton.setOnAction(event -> {
             try {
                 // Load the new FXML document
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/clubs-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/clubs-view.fxml"));
                 Parent root = loader.load();
 
                 // Create a new scene
@@ -115,7 +115,7 @@ public class HomeController {
 
         financialButton.setOnAction(event -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/financial-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/financial-view.fxml"));
                 Parent root = loader.load();
                 // Create a new scene
                 Scene scene = new Scene(root, 600, 400); // you can specify preferred scene dimensions (e.g., 600x400 here)

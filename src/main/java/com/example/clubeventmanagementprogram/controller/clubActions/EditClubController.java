@@ -29,7 +29,7 @@ public class EditClubController{
     ClubDAO clubDao = new ClubDAO(); // Create DAO
     ClubService clubService = new ClubServiceImpl(clubDao);
     @FXML
-    private TextArea topicsArea;
+    private TextField topicsField;
 
     @FXML
     Button editButton;
@@ -42,7 +42,7 @@ public class EditClubController{
     public void initialize() {
         clubNameField.setText(currentClub.getClubName());
         clubDescriptionField.setText(currentClub.getDescription());
-        topicsArea.setText(String.join("\n", currentClub.getTopics()));
+        topicsField.setText(currentClub.getTopics());
         // Cancel button action
         cancelButton.setOnAction(event -> {
             loadClubScene();
@@ -69,7 +69,7 @@ public class EditClubController{
         try {
             currentClub.setClubName(clubNameField.getText());
             currentClub.setDescription(clubDescriptionField.getText());
-            currentClub.setTopics(Arrays.asList(topicsArea.getText().split("\\n")));
+            currentClub.setTopics(topicsField.getText());
 
             ClubService clubService = new ClubServiceImpl(clubDao);
             clubService.updateClub(currentClub);

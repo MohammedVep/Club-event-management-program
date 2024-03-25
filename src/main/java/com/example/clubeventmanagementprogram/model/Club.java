@@ -11,7 +11,7 @@ public class Club implements Serializable {
     private int id;
     private String clubName;
     private String description;
-    private List<String> topics;
+    private String topics;
     private BooleanProperty selected;
 
 
@@ -26,7 +26,7 @@ public class Club implements Serializable {
 
     private LocalDate dateAdded;
 
-    public Club(int id, String name, String description, List<String> topics) {
+    public Club(int id, String name, String description, String topics) {
         this.id = id;
         this.clubName = name;
         this.description = description;
@@ -61,11 +61,11 @@ public class Club implements Serializable {
         this.description = description;
     }
 
-    public List<String> getTopics() {
+    public String getTopics() {
         return topics;
     }
 
-    public void setTopics(List<String> topics) {
+    public void setTopics(String topics) {
         this.topics = topics;
     }
     public boolean isSelected() {

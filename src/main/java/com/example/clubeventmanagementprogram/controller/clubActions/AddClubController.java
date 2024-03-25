@@ -28,7 +28,7 @@ public class AddClubController {
     private TextField clubDescriptionField;
 
     @FXML
-    private TextArea topicsArea;
+    private TextField topicsField;
 
     @FXML
     Button addButton;
@@ -64,10 +64,7 @@ public class AddClubController {
         try {
             String clubName = clubNameField.getText();
             String clubDescription = clubDescriptionField.getText();
-
-            // Fetch topics from the user's input and split into a list
-            List<String> topics = Arrays.asList(topicsArea.getText().split("\\n"));
-
+            String topics = topicsField.getText();
 
 
             // Add an ID for the club

@@ -6,7 +6,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
-public class EventTrackingChart extends Application {
+public class EventTrackingChart {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Event Tracking Chart");

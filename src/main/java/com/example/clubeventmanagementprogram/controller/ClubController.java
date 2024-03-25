@@ -59,6 +59,7 @@ public class ClubController implements IClubUpdatable{
     @FXML
     private Button deleteButton;              // Place the 'Delete' button below the table
 
+
     private Club currentClub;   // declare it here
 
     @Override

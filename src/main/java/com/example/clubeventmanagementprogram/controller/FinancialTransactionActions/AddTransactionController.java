@@ -66,6 +66,8 @@ public class AddTransactionController {
 
     FinancialTransactionDAO financialTransactionDao = new FinancialTransactionDAO();
 
+    FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDao);
+
     @FXML
     private void handleSaveAction(ActionEvent event){
         try {
@@ -73,7 +75,8 @@ public class AddTransactionController {
             LocalDate transactionDate = transactionDatePicker.getValue();
             String description = descriptionField.getText();
             double transactionAmount = Double.parseDouble(transactionAmountField.getText());
-            int financialTransactionId = financialTransactions.size() + 1;
+            List<FinancialTransaction> financialTransactionsFromDb = financialTransactionService.getAllFinancialTransactions();
+            int financialTransactionId = financialTransactionsFromDb.size() + 1;
             FinancialTransaction newTransaction = new FinancialTransaction(financialTransactionId, transactionName, transactionDate, description, transactionAmount);
             newTransaction.setFinancial_id(financialTransactionId);
             FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDao);

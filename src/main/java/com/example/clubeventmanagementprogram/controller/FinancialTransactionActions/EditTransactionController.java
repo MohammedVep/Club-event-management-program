@@ -1,5 +1,6 @@
 package com.example.clubeventmanagementprogram.controller.FinancialTransactionActions;
 
+import com.example.clubeventmanagementprogram.controller.IFinancialTransactionUpdatable;
 import com.example.clubeventmanagementprogram.dao.FinancialTransactionDAO;
 import com.example.clubeventmanagementprogram.model.FinancialTransaction;
 import com.example.clubeventmanagementprogram.service.FinancialTransactionService;
@@ -34,7 +35,13 @@ public class EditTransactionController {
 
     @FXML
     private TextField transactionAmountField;
-    private ObservableList<FinancialTransaction> financialTransactions;
+
+    private IFinancialTransactionUpdatable financialTransactionUpdatable;
+
+    public void setFinancialTransactionUpdatable(IFinancialTransactionUpdatable financialTransactionUpdatable){
+        this.financialTransactionUpdatable = financialTransactionUpdatable;
+    }
+
 
     @FXML
     Button editButton;
@@ -46,10 +53,6 @@ public class EditTransactionController {
 
     @FXML
     public void initialize(){
-        transactionNameField.setText(currentTransaction.getTransactionName());
-        transactionDatePicker.setValue(currentTransaction.getDate());
-        descriptionField.setText(currentTransaction.getDescription());
-        transactionAmountField.setText(String.valueOf(currentTransaction.getTransactionAmount()));
         cancelButton.setOnAction(event -> {
             loadTransactionScene();
         });
@@ -58,6 +61,12 @@ public class EditTransactionController {
         editButton.setOnAction(event -> {
             handleSaveAction(event);
         });
+        if(currentTransaction != null){
+            transactionNameField.setText(currentTransaction.getTransactionName());
+            transactionDatePicker.setValue(currentTransaction.getDate());
+            descriptionField.setText(currentTransaction.getDescription());
+            transactionAmountField.setText(String.valueOf(currentTransaction.getTransactionAmount()));
+        }
     }
 
     public EditTransactionController(){
@@ -65,10 +74,22 @@ public class EditTransactionController {
     }
 
     public EditTransactionController(ObservableList<FinancialTransaction> financialTransactions) {
-        this.financialTransactions = financialTransactions;
+        this.financialTransactionService = new FinancialTransactionServiceImpl(new FinancialTransactionDAO());
     }
 
     FinancialTransactionDAO financialTransactionDao = new FinancialTransactionDAO();
+    FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDao);
+
+    public void setCurrentFinancialTransaction(FinancialTransaction financialTransaction){
+        this.currentTransaction = financialTransaction;
+        System.out.println("Set transaction: " + financialTransaction);
+        if(financialTransaction != null){
+            transactionNameField.setText(currentTransaction.getTransactionName());
+            transactionDatePicker.setValue(currentTransaction.getDate());
+            descriptionField.setText(currentTransaction.getDescription());
+            transactionAmountField.setText(String.valueOf(currentTransaction.getTransactionAmount()));
+        }
+    }
 
     @FXML
     private void handleSaveAction(ActionEvent event){
@@ -80,6 +101,10 @@ public class EditTransactionController {
 
             FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDao);
             financialTransactionService.updateTransaction(currentTransaction);
+
+            if (financialTransactionUpdatable != null){
+                financialTransactionUpdatable.updateFinancialTransactionTable();
+            }
 
             // Load the Transaction view
             Parent transactionViewRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/financial-view.fxml"));

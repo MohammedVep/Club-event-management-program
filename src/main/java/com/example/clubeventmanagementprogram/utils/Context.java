@@ -12,7 +12,7 @@ public class Context {
     public static ClubService clubService = new ClubServiceImpl(clubDAO);
 
     private static FinancialTransactionDAO financialTransactionDAO = new FinancialTransactionDAO();
-    private static FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDAO);
+    public static FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDAO);
 
     public static ClubService getClubService() {
         return clubService;

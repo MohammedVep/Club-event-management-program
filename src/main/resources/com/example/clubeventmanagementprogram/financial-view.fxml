@@ -21,8 +21,8 @@
                 <TableColumn fx:id="transactionAmountColumn" prefWidth="100.0" text="Cost" />
             </columns>
         </TableView>
-        <Button layoutX="10.0" layoutY="320.0" mnemonicParsing="false" text="Add Financial Transaction" onAction="#handleAddFinancialTransaction" />
-        <Button layoutX="300.0" layoutY="320.0" mnemonicParsing="false" text="Edit Financial Transaction" onAction="#handleEditFinancialTransaction" />
-        <Button layoutX="450.0" layoutY="320.0" mnemonicParsing="false" text="Delete Financial Transaction" onAction="#handleDeleteFinancialTransaction" />
+        <Button fx:id="addButton" layoutX="10.0" layoutY="320.0" mnemonicParsing="false" text="Add Financial Transaction" onAction="#handleAddFinancialTransaction" />
+        <Button fx:id="editButton" layoutX="300.0" layoutY="320.0" mnemonicParsing="false" text="Edit Financial Transaction" onAction="#handleEditFinancialTransaction" />
+        <Button fx:id="deleteButton" layoutX="450.0" layoutY="320.0" mnemonicParsing="false" text="Delete Financial Transaction" onAction="#handleDeleteFinancialTransaction" />
     </children>
 </AnchorPane>

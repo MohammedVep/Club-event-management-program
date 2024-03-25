@@ -26,7 +26,6 @@ public class DeleteTransactionController {
     @FXML
     private Button cancelButton;
 
-    private ObservableList<FinancialTransaction> financialTransactions;
 
     private FinancialTransactionDAO financialTransactionDao = new FinancialTransactionDAO();
     private FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDao);
@@ -36,12 +35,8 @@ public class DeleteTransactionController {
         cancelButton.setOnAction(e -> loadFinancialTransactionScene());
     }
 
-    public DeleteTransactionController(){
-
-    }
-
-    public DeleteTransactionController(ObservableList<FinancialTransaction> financialTransactions){
-        this.financialTransactions = financialTransactions;
+    public DeleteTransactionController(TableView<FinancialTransaction> financialTransactionsTable){
+        this.financialTransactionsTable = financialTransactionsTable;
     }
 
     @FXML

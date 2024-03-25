@@ -1,6 +1,7 @@
 package com.example.clubeventmanagementprogram.controller;
 
-import com.example.clubeventmanagementprogram.model.Club;
+import com.example.clubeventmanagementprogram.controller.FinancialTransactionActions.DeleteTransactionController;
+import com.example.clubeventmanagementprogram.controller.FinancialTransactionActions.EditTransactionController;
 import com.example.clubeventmanagementprogram.model.FinancialTransaction;
 import com.example.clubeventmanagementprogram.service.FinancialTransactionService;
 import com.example.clubeventmanagementprogram.utils.Context;
@@ -23,16 +24,19 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import static com.example.clubeventmanagementprogram.utils.Context.financialTransactionService;
 
-public class FinancialTransactionController {
+public class FinancialTransactionController implements IFinancialTransactionUpdatable{
     @FXML
     private Label usernameLabel;
 
     @FXML
     private Label manageFinancialTransactionsLabel;
 
+    private FinancialTransaction currentFinancialTransaction;
+
     @FXML
-    private TableColumn<Club, Boolean> checkboxColumn;
+    private TableColumn<FinancialTransaction, Boolean> checkboxColumn;
 
     @FXML
     private Button logoutButton;
@@ -60,6 +64,13 @@ public class FinancialTransactionController {
     private Button deleteButton;
 
     private ObservableList<FinancialTransaction> financialTransactionData = FXCollections.observableArrayList();
+
+    @Override
+    public void updateFinancialTransactionTable(){
+        financialTransactionData.clear();
+        List<FinancialTransaction> updatedList = financialTransactionService.getAllFinancialTransactions();
+        financialTransactionData.addAll(updatedList);
+    }
     private void loadFinancialTransactionData() {
         FinancialTransactionService financialTransactionService = Context.getFinancialTransactionService();
         List<FinancialTransaction> financialTransactionsFromDb = financialTransactionService.getAllFinancialTransactions();
@@ -67,14 +78,15 @@ public class FinancialTransactionController {
     }
 
     public void initialize(){
-        // Set cell value factory
-        checkboxColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
-// Set cell factory
-        checkboxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxColumn));
         logoutButton.setOnAction(event -> handleLogout(event));
         addButton.setOnAction(event -> handleAddFinancialTransaction(event));
         editButton.setOnAction(event -> handleEditFinancialTransaction(event));
         deleteButton.setOnAction(event -> handleDeleteFinancialTransaction(event));
+
+        // Set cell value factory
+        checkboxColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
+// Set cell factory
+        checkboxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxColumn));
         transactionNameColumn.setCellValueFactory(new PropertyValueFactory<>("transactionName"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -122,13 +134,20 @@ public class FinancialTransactionController {
     }
     @FXML
     private void handleEditFinancialTransaction(ActionEvent event){
+        currentFinancialTransaction = financialTransactionTableView.getSelectionModel().getSelectedItem();
         Node source = (Node) event.getSource();
         try {
-            Parent editFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/edit-transaction.fxml"));
-            Scene editFinancialTransactionScene = new Scene(editFinancialTransactionRoot);
-
-            Stage currentStage = (Stage) source.getScene().getWindow();
-            currentStage.setScene(editFinancialTransactionScene);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/edit-transaction.fxml"));
+            Parent editFinancialTransactionRoot = loader.load();
+            EditTransactionController editTransactionController = loader.getController();
+            editTransactionController.setFinancialTransactionUpdatable(this);
+            if(currentFinancialTransaction != null){
+                editTransactionController.setCurrentFinancialTransaction(currentFinancialTransaction);
+                Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                currentStage.setScene(new Scene(editFinancialTransactionRoot));
+            } else {
+                System.err.println("No transaction was selected");
+            }
 
         } catch(IOException e){
             System.err.println("Error loading Edit Financial Transaction page");
@@ -139,9 +158,11 @@ public class FinancialTransactionController {
     private void handleDeleteFinancialTransaction(ActionEvent event){
         Node source = (Node) event.getSource();
         try {
-            Parent deletedFinancialTransactionRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/delete-transaction.fxml"));
-            Scene deleteFinancialTransactionScene = new Scene(deletedFinancialTransactionRoot);
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/delete-transaction.fxml"));
+            DeleteTransactionController controller = new DeleteTransactionController(financialTransactionTableView);
+            loader.setController(controller);
+            Parent deleteFinancialTransactionRoot = loader.load();
+            Scene deleteFinancialTransactionScene = new Scene(deleteFinancialTransactionRoot);
             Stage currentStage = (Stage) source.getScene().getWindow();
             currentStage.setScene(deleteFinancialTransactionScene);
 

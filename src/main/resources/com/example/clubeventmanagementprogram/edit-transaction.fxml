@@ -20,6 +20,6 @@
     <Label text="Transaction Date" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
     <DatePicker fx:id="transactionDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-    <Button text="Save" onAction="#handleSaveAction" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Button fx:id="editButton" text="Save" onAction="#handleSaveAction" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
     <Button fx:id="cancelButton" onAction="#loadTransactionScene" text="Cancel" layoutX="20" layoutY="20"/>
 </GridPane>

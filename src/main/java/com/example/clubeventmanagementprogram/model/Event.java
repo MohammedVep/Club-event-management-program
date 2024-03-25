@@ -1,16 +1,21 @@
 package com.example.clubeventmanagementprogram.model;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 
-public class Event {
+public class Event implements Serializable {
     private int id;
     private String eventName;
     private String description;
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
+    private BooleanProperty selected;
 
     public Event(int id, String eventName, String description, LocalDate date, LocalTime startTime, LocalTime endTime){
         this.id = id;
@@ -19,6 +24,7 @@ public class Event {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.selected = new SimpleBooleanProperty(false);
     }
 
     public int getId() {
@@ -67,5 +73,16 @@ public class Event {
 
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
+    }
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public BooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
     }
 }

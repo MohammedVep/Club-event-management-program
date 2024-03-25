@@ -1,5 +1,6 @@
 package com.example.clubeventmanagementprogram.controller;
 
+import com.example.clubeventmanagementprogram.model.Club;
 import com.example.clubeventmanagementprogram.model.FinancialTransaction;
 import com.example.clubeventmanagementprogram.service.FinancialTransactionService;
 import com.example.clubeventmanagementprogram.utils.Context;
@@ -17,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.scene.control.cell.CheckBoxTableCell;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -28,6 +30,9 @@ public class FinancialTransactionController {
 
     @FXML
     private Label manageFinancialTransactionsLabel;
+
+    @FXML
+    private TableColumn<Club, Boolean> checkboxColumn;
 
     @FXML
     private Button logoutButton;
@@ -62,6 +67,10 @@ public class FinancialTransactionController {
     }
 
     public void initialize(){
+        // Set cell value factory
+        checkboxColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
+// Set cell factory
+        checkboxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxColumn));
         logoutButton.setOnAction(event -> handleLogout(event));
         addButton.setOnAction(event -> handleAddFinancialTransaction(event));
         editButton.setOnAction(event -> handleEditFinancialTransaction(event));

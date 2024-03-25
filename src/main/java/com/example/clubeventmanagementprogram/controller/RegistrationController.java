@@ -3,6 +3,7 @@ package com.example.clubeventmanagementprogram.controller;
 import com.example.clubeventmanagementprogram.model.Club;
 import com.example.clubeventmanagementprogram.model.User;
 import com.example.clubeventmanagementprogram.service.UserService;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,6 +45,11 @@ public class RegistrationController {
     public void initialize() {
         registerButton.setOnAction(this::register);
     }
+
+    public void setUsers(ObservableList<User> users) {
+        this.users = users;
+    }
+
 
     @FXML
     public void register(ActionEvent event) {

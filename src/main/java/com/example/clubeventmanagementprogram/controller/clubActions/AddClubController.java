@@ -51,10 +51,12 @@ public class AddClubController {
         });
     }
 
+    public AddClubController() {
+    }
+
     public AddClubController(ObservableList<Club> clubs) {
         this.clubs = clubs;
     }
-
     ClubDAO clubDao = new ClubDAO(); // Create DAO
 
     @FXML

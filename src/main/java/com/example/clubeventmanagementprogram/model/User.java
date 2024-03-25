@@ -1,16 +1,23 @@
 package com.example.clubeventmanagementprogram.model;
 
-public class User {
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int userId;
     private String userName;
     private String email;
     private String password;
+    private BooleanProperty selected;
 
     public User(int userId, String userName, String email, String password) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.selected = new SimpleBooleanProperty(false);
     }
 
     public int getUserId() {
@@ -43,5 +50,16 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public BooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
     }
 }

@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.scene.control.cell.CheckBoxTableCell;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -71,6 +72,10 @@ public class ClubController {
         deleteButton.setOnAction(event -> handleDeleteClub(event));
 
         // Set up table columns to pull data from Club objects
+        // Set cell value factory
+        checkboxColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
+// Set cell factory
+        checkboxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxColumn));
         clubNameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
         checkboxColumn.setCellValueFactory(new PropertyValueFactory<>("checkbox"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));

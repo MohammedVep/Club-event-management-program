@@ -53,6 +53,10 @@ public class EditClubController{
         });
     }
 
+    public EditClubController(){
+
+    }
+
     public EditClubController(ObservableList<Club> clubs) {
         this.clubs = clubs;
     }

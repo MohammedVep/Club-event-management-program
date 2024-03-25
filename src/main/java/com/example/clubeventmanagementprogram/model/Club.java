@@ -1,18 +1,24 @@
 package com.example.clubeventmanagementprogram.model;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Club {
+public class Club implements Serializable {
     private int id;
     private String clubName;
     private String description;
     private List<String> topics;
+    private BooleanProperty selected;
 
     public Club(int id, String name, String description, List<String> topics) {
         this.id = id;
         this.clubName = name;
         this.description = description;
         this.topics = topics;
+        this.selected = new SimpleBooleanProperty(false);
     }
 
     public int getId() {
@@ -45,5 +51,16 @@ public class Club {
 
     public void setTopics(List<String> topics) {
         this.topics = topics;
+    }
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public BooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
     }
 }

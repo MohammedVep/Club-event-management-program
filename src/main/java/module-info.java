@@ -17,6 +17,8 @@ module com.example.clubeventmanagementprogram {
     opens com.example.clubeventmanagementprogram to javafx.fxml;
     exports com.example.clubeventmanagementprogram.application;
     exports com.example.clubeventmanagementprogram.controller to javafx.fxml;
+    exports com.example.clubeventmanagementprogram.controller.clubActions to javafx.fxml;
+    exports com.example.clubeventmanagementprogram.controller.FinancialTransactionActions to javafx.fxml;
 
     opens com.example.clubeventmanagementprogram.controller to javafx.base, javafx.fxml;
 }

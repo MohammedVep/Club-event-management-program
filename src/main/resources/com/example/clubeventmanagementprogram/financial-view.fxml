@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.FinancialTransactionController">
     <children>
         <Label fx:id="usernameLabel" layoutX="10.0" layoutY="10.0" text="User"/>
@@ -11,6 +12,9 @@
 
         <TableView fx:id="financialTransactionTableView" editable="true" layoutX="14.0" layoutY="40.0" prefHeight="346.0" prefWidth="572.0">
             <columns>
+                <TableColumn fx:id="checkboxColumn">
+                    <cellValueFactory><PropertyValueFactory property="selected"/></cellValueFactory>
+                </TableColumn>
                 <TableColumn fx:id="transactionNameColumn" prefWidth="150.0" text="Transaction name" />
                 <TableColumn fx:id="descriptionColumn" prefWidth="200.0" text="Transaction Description" />
                 <TableColumn fx:id="dateColumn" prefWidth="150.0" text="Transaction Date" />

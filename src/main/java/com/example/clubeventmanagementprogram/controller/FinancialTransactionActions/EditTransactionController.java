@@ -60,6 +60,10 @@ public class EditTransactionController {
         });
     }
 
+    public EditTransactionController(){
+
+    }
+
     public EditTransactionController(ObservableList<FinancialTransaction> financialTransactions) {
         this.financialTransactions = financialTransactions;
     }

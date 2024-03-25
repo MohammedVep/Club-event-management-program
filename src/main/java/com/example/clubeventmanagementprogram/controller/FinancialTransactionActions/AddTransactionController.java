@@ -56,6 +56,10 @@ public class AddTransactionController {
         });
     }
 
+    public AddTransactionController(){
+
+    }
+
     public AddTransactionController(ObservableList<FinancialTransaction> financialTransactions) {
         this.financialTransactions = financialTransactions;
     }

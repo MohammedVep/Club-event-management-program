@@ -1,10 +1,12 @@
 package com.example.clubeventmanagementprogram.controller.FinancialTransactionActions;
 
 import com.example.clubeventmanagementprogram.controller.FinancialTransactionController;
+import com.example.clubeventmanagementprogram.controller.clubActions.DeleteClubController;
 import com.example.clubeventmanagementprogram.dao.FinancialTransactionDAO;
 import com.example.clubeventmanagementprogram.model.FinancialTransaction;
 import com.example.clubeventmanagementprogram.service.FinancialTransactionService;
 import com.example.clubeventmanagementprogram.service.FinancialTransactionServiceImpl;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,12 +26,22 @@ public class DeleteTransactionController {
     @FXML
     private Button cancelButton;
 
+    private ObservableList<FinancialTransaction> financialTransactions;
+
     private FinancialTransactionDAO financialTransactionDao = new FinancialTransactionDAO();
     private FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDao);
 
     public void initialize(){
         deleteButton.setOnAction(e -> deleteSelectedFinancialTransaction());
         cancelButton.setOnAction(e -> loadFinancialTransactionScene());
+    }
+
+    public DeleteTransactionController(){
+
+    }
+
+    public DeleteTransactionController(ObservableList<FinancialTransaction> financialTransactions){
+        this.financialTransactions = financialTransactions;
     }
 
     @FXML

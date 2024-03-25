@@ -1,52 +1,39 @@
-package com.example.clubeventmanagementprogram.controller;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
+public class EventTrackingChart extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Event Tracking Chart");
 
-public class EventTrackingController {
-    private String URL = "jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres";
-    private String USERNAME = "edb_admin";
-    private String PASSWORD = "Rlo:On)YMYtL%Ob";
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
 
-    public EventTrackingController(String dbUrl, String dbUsername, String dbPassword) {
-        this.URL = dbUrl;
-        this.USERNAME = dbUsername;
-        this.PASSWORD = dbPassword;
-    }
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Event Tracking Data");
 
-    public void trackEvent(String eventName, String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            String sql = "INSERT INTO events (eventName, description, date, startTime, endTime) VALUES (?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, eventName);
-                statement.setString(2, description);
-                statement.setDate(3, java.sql.Date.valueOf(date));
-                statement.setTime(4, java.sql.Time.valueOf(startTime));
-                statement.setTime(5, java.sql.Time.valueOf(endTime));
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Event Counts");
 
-                statement.executeUpdate();
-                System.out.println("Event tracked successfully.");
-            }
-        } catch (SQLException e) {
-            System.err.println("Error tracking event: " + e.getMessage());
-        }
+        // Add data to the series (you can fetch this data from your database)
+        series.getData().add(new XYChart.Data<>("Event 1", 10));
+        series.getData().add(new XYChart.Data<>("Event 2", 20));
+        series.getData().add(new XYChart.Data<>("Event 3", 15));
+        series.getData().add(new XYChart.Data<>("Event 4", 30));
+
+        barChart.getData().add(series);
+
+        Scene scene = new Scene(barChart, 800, 600);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
-        String URL = "jdbc:postgresql://localhost:5432/postgres";
-        String USERNAME = "postgres";
-        String PASSWORD = "N7IR+fk”hbU#@";
-
-        EventTrackingController controller = new EventTrackingController(URL, USERNAME, PASSWORD);
-
-        // Example usage:
-        int userId = 123;
-        String eventData = "{\"page\": \"homepage\", \"action\": \"click_button\"}";
-
+        launch(args);
     }
 }
-

@@ -27,7 +27,6 @@ public class AddClubController {
     @FXML
     private TextField clubDescriptionField;
 
-    private ObservableList<Club> clubs;
     @FXML
     private TextArea topicsArea;
 
@@ -36,6 +35,8 @@ public class AddClubController {
 
     @FXML
     Button cancelButton;
+    ClubDAO clubDao = new ClubDAO(); // Create DAO
+    ClubService clubService = new ClubServiceImpl(clubDao);
 
     @FXML
     public void initialize() {
@@ -47,7 +48,6 @@ public class AddClubController {
         // Save button action
         addButton.setOnAction(event -> {
             handleSaveAction(event);
-            loadClubScene();
         });
     }
 
@@ -55,9 +55,9 @@ public class AddClubController {
     }
 
     public AddClubController(ObservableList<Club> clubs) {
-        this.clubs = clubs;
+        this.clubService = new ClubServiceImpl(new ClubDAO());
     }
-    ClubDAO clubDao = new ClubDAO(); // Create DAO
+
 
     @FXML
     private void handleSaveAction(ActionEvent event) {
@@ -71,7 +71,8 @@ public class AddClubController {
 
 
             // Add an ID for the club
-            int clubId = clubs.size() + 1;
+            List<Club> clubsFromDb = clubService.getAllClubs();
+            int clubId = clubsFromDb.size() + 1;
             Club newClub = new Club(clubId, clubName, clubDescription, topics);
             newClub.setId(clubId);
             // Persist club using DAO and service layer

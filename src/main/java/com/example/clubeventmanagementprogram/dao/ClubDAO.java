@@ -33,9 +33,10 @@ public class ClubDAO {
 
                 PreparedStatement topicStmt = conn.prepareStatement(insertTopicSql);
 
-                for (String topic : club.getTopics()) { // assuming Club class now has List<String> or Set<String> getTopics method
+                for (String topic : club.getTopics()) {
+                    int topicId = getTopicIdByTopicName(topic); // This should return the id of the topic from the database.
                     topicStmt.setInt(1, clubId);
-                    topicStmt.setInt(2, Integer.parseInt(topic)); // replace with getting topicId from topics table
+                    topicStmt.setInt(2, topicId);
                     topicStmt.addBatch();
                 }
 

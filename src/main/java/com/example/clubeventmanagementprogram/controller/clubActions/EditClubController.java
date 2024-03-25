@@ -26,7 +26,8 @@ public class EditClubController{
     @FXML
     private TextField clubDescriptionField;
 
-    private ObservableList<Club> clubs;
+    ClubDAO clubDao = new ClubDAO(); // Create DAO
+    ClubService clubService = new ClubServiceImpl(clubDao);
     @FXML
     private TextArea topicsArea;
 
@@ -58,10 +59,10 @@ public class EditClubController{
     }
 
     public EditClubController(ObservableList<Club> clubs) {
-        this.clubs = clubs;
+        this.clubService = new ClubServiceImpl(new ClubDAO());
     }
 
-    ClubDAO clubDao = new ClubDAO(); // Create DAO
+
 
     @FXML
     private void handleSaveAction(ActionEvent event) {
@@ -103,11 +104,5 @@ public class EditClubController{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void handleSaveAndLoadClubScene(ActionEvent event) {
-        handleSaveAction(event);
-        loadClubScene();
     }
 }

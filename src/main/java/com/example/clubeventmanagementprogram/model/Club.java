@@ -4,6 +4,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Club implements Serializable {
@@ -12,6 +13,18 @@ public class Club implements Serializable {
     private String description;
     private List<String> topics;
     private BooleanProperty selected;
+
+
+
+    public LocalDate getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(LocalDate dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    private LocalDate dateAdded;
 
     public Club(int id, String name, String description, List<String> topics) {
         this.id = id;
@@ -23,6 +36,9 @@ public class Club implements Serializable {
 
     public int getId() {
         return id;
+    }
+    public String getTopicsString() {
+        return String.join(", ", topics);
     }
 
     public void setId(int id) {

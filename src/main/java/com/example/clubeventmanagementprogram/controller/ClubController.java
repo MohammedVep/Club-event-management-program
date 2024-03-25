@@ -77,9 +77,9 @@ public class ClubController {
 // Set cell factory
         checkboxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxColumn));
         clubNameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
-        checkboxColumn.setCellValueFactory(new PropertyValueFactory<>("checkbox"));
+        checkboxColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        topicsColumn.setCellValueFactory(new PropertyValueFactory<>("topics"));
+        topicsColumn.setCellValueFactory(new PropertyValueFactory<>("topicsString"));;
         dateAddedColumn.setCellValueFactory(new PropertyValueFactory<>("dateAdded"));
         // Bind the TableView items to the ObservableList
         clubTableView.setItems(clubData);

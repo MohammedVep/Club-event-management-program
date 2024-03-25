@@ -35,7 +35,7 @@ public class ClubDAO {
 
 
     public void updateClub(Club club) {
-        String sqlClub = "UPDATE clubs SET clubname = ?, description = ? WHERE id = ?";
+        String sqlClub = "UPDATE clubs SET clubname = ?, description = ?, topics = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             // use a transaction to ensure all operations happen atomically
@@ -43,9 +43,11 @@ public class ClubDAO {
 
             PreparedStatement pstmt = conn.prepareStatement(sqlClub);
 
-            pstmt.setString(1, club.getClubName());
-            pstmt.setString(2, club.getDescription());
-            pstmt.setString(3, club.getTopics());
+            pstmt.setString(1, club.getClubName());    // clubname
+            pstmt.setString(2, club.getDescription()); // description
+            pstmt.setString(3, club.getTopics());      // topics
+            pstmt.setInt(4, club.getId());             // id
+
             pstmt.executeUpdate();
 
             conn.commit();

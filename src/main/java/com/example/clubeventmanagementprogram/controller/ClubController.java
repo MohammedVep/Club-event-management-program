@@ -1,5 +1,7 @@
 package com.example.clubeventmanagementprogram.controller;
 
+import com.example.clubeventmanagementprogram.controller.clubActions.DeleteClubController;
+import com.example.clubeventmanagementprogram.controller.clubActions.EditClubController;
 import com.example.clubeventmanagementprogram.model.Club;
 import com.example.clubeventmanagementprogram.service.ClubService;
 import com.example.clubeventmanagementprogram.utils.Context;
@@ -23,7 +25,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class ClubController {
+import static com.example.clubeventmanagementprogram.utils.Context.clubService;
+
+public class ClubController implements IClubUpdatable{
 
     @FXML
     private Label usernameLabel;              // Display the Username at the upper left corner
@@ -54,6 +58,20 @@ public class ClubController {
     private Button editButton;                // Place the 'Edit' button below the table
     @FXML
     private Button deleteButton;              // Place the 'Delete' button below the table
+
+    private Club currentClub;   // declare it here
+
+    @Override
+    public void updateClubTable() {
+        // Clear the old list
+        clubData.clear();
+
+        // Fetch the updated list
+        List<Club> updatedList = clubService.getAllClubs();
+
+        // Add the updated list to the observable list
+        clubData.addAll(updatedList);
+    }
 
     // Bind properties to the club data and setup Actions.
     private ObservableList<Club> clubData = FXCollections.observableArrayList();
@@ -127,15 +145,25 @@ public class ClubController {
 
     @FXML
     private void handleEditClub(ActionEvent event) {
+        // Initialize it here
+        currentClub = clubTableView.getSelectionModel().getSelectedItem();
+
         Node source = (Node) event.getSource();
         try {
-            // Load the edit-club view
-            Parent editClubRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/edit-club.fxml"));
-            Scene editClubScene = new Scene(editClubRoot);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/edit-club.fxml"));
+            Parent editClubRoot = loader.load();
 
-            // Get the current stage and set the scene to edit-club
-            Stage currentStage = (Stage) source.getScene().getWindow();
-            currentStage.setScene(editClubScene);
+            EditClubController editClubController = loader.getController();
+            editClubController.setClubUpdatable(this);
+            // Get currently selected club and pass it to the EditClubController
+            if(currentClub != null) {
+                editClubController.setCurrentClub(currentClub);
+                Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                currentStage.setScene(new Scene(editClubRoot));
+            } else {
+                // Show some error message to the user or write some error log
+                System.err.println("No club was selected");
+            }
         } catch(IOException e){
             System.err.println("Error loading Edit Club page");
             e.printStackTrace();
@@ -146,11 +174,11 @@ public class ClubController {
     private void handleDeleteClub(ActionEvent event) {
         Node source = (Node) event.getSource();
         try {
-            // Load the delete-club view
-            Parent deleteClubRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/delete-club.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/delete-club.fxml"));
+            DeleteClubController controller = new DeleteClubController(clubTableView);
+            loader.setController(controller);
+            Parent deleteClubRoot = loader.load();
             Scene deleteClubScene = new Scene(deleteClubRoot);
-
-            // Get the current stage and set the scene to delete-club
             Stage currentStage = (Stage) source.getScene().getWindow();
             currentStage.setScene(deleteClubScene);
         } catch(IOException e){

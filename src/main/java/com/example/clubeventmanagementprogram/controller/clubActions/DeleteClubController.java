@@ -1,10 +1,8 @@
 package com.example.clubeventmanagementprogram.controller.clubActions;
-import com.example.clubeventmanagementprogram.controller.ClubController;
 import com.example.clubeventmanagementprogram.dao.ClubDAO;
 import com.example.clubeventmanagementprogram.model.Club;
 import com.example.clubeventmanagementprogram.service.ClubService;
 import com.example.clubeventmanagementprogram.service.ClubServiceImpl;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,22 +22,18 @@ public class DeleteClubController {
     Button deleteButton;
     @FXML
     Button cancelButton;
-    private ObservableList<Club> clubs;
 
     private ClubDAO clubDAO = new ClubDAO();
     private ClubService clubService = new ClubServiceImpl(clubDAO); // passing ClubDAO instance
 
+    public DeleteClubController(TableView<Club> clubsTable){
+        this.clubsTable = clubsTable;
+    }
+
+    @FXML
     public void initialize() {
         deleteButton.setOnAction(e -> deleteSelectedClub());
         cancelButton.setOnAction(e -> loadClubScene());
-    }
-
-    public DeleteClubController(){
-
-    }
-
-    public DeleteClubController(ObservableList<Club> clubs){
-        this.clubs = clubs;
     }
 
     @FXML
@@ -65,6 +59,7 @@ public class DeleteClubController {
             System.out.println("No Club selected in the table.");
         }
     }
+
     @FXML
     private void loadClubScene() {
         try {

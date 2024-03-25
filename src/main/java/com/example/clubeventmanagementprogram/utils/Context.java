@@ -9,7 +9,7 @@ import com.example.clubeventmanagementprogram.service.FinancialTransactionServic
 
 public class Context {
     private static ClubDAO clubDAO = new ClubDAO(); // Assuming you have a ClubDAOImpl class
-    private static ClubService clubService = new ClubServiceImpl(clubDAO);
+    public static ClubService clubService = new ClubServiceImpl(clubDAO);
 
     private static FinancialTransactionDAO financialTransactionDAO = new FinancialTransactionDAO();
     private static FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDAO);

@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.clubeventmanagementprogram.controller.clubActions.EditClubController">
-    <Label text="Club Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <TextField fx:id="clubNameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.clubeventmanagementprogram.controller.clubActions.EditClubController">
+    <Label text="Club Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <TextField fx:id="clubNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-    <Label text="Club Description:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField fx:id="clubDescriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label text="Club Description:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField fx:id="clubDescriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-    <Label text="Topics:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextArea fx:id="topicsArea" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label text="Topics:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextArea fx:id="topicsArea" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-    <Button text="Save" onAction="#handleSaveAndLoadClubScene" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-    <Button fx:id="cancelButton" onAction="#loadClubScene" text="Cancel" layoutX="20" layoutY="20"/>
+    <Button onAction="#handleSaveAndLoadClubScene" text="Save" GridPane.rowIndex="3" />
+    <Button fx:id="cancelButton" layoutX="20" layoutY="20" onAction="#loadClubScene" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
 </GridPane>

@@ -20,8 +20,8 @@ public class UserDAO {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
+                int id = rs.getInt("user_id");
+                String name = rs.getString("userName");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
 
@@ -47,8 +47,8 @@ public class UserDAO {
              ResultSet rs = pstmtUser.executeQuery()) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
+                int id = rs.getInt("user_id");
+                String name = rs.getString("userName");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 User user = new User(id, name, email, password);
@@ -69,8 +69,8 @@ public class UserDAO {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                int userId = rs.getInt("id");
-                String name = rs.getString("name");
+                int userId = rs.getInt("user_id");
+                String name = rs.getString("userName");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 user = new User(userId, name, email, password);

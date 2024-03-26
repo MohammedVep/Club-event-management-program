@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClubDAO {
-    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
-    private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "N7IR+fk”hbU#@";
+    private static final String URL = "jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres";
+    private static final String USERNAME = "edb_admin";
+    private static final String PASSWORD = "Rlo:On)YMYtL%Ob";
 
     public void saveClub(Club club) {
-        String sql = "INSERT INTO clubs (clubname, description) VALUES (?, ?)";
-        String insertTopicSql = "INSERT INTO club_topics (club_id, topic_id) VALUES (?, ?)";
+        String sql = "INSERT INTO clubs (clubname, description, topics) VALUES (?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
 
@@ -24,23 +23,9 @@ public class ClubDAO {
 
             pstmt.setString(1, club.getClubName());
             pstmt.setString(2, club.getDescription());
+            pstmt.setString(3, club.getTopics());
             pstmt.executeUpdate();
 
-            ResultSet rs = pstmt.getGeneratedKeys();
-
-            if (rs.next()) {
-                int clubId = rs.getInt(1); // id of the newly inserted club
-
-                PreparedStatement topicStmt = conn.prepareStatement(insertTopicSql);
-
-                for (String topic : club.getTopics()) { // assuming Club class now has List<String> or Set<String> getTopics method
-                    topicStmt.setInt(1, clubId);
-                    topicStmt.setInt(2, Integer.parseInt(topic)); // replace with getting topicId from topics table
-                    topicStmt.addBatch();
-                }
-
-                topicStmt.executeBatch();
-            }
 
             conn.commit();
         } catch (SQLException e) {
@@ -48,29 +33,9 @@ public class ClubDAO {
         }
     }
 
-    public int getTopicIdByTopicName(String topicName) {
-        String sql = "SELECT id FROM topics WHERE name = ?";
-        int topicId = 0;
-
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)){
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, topicName);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                topicId = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return topicId;
-    }
 
     public void updateClub(Club club) {
-        String sqlClub = "UPDATE clubs SET clubname = ?, description = ? WHERE id = ?";
-        String deleteOldTopicsSql = "DELETE FROM club_topics WHERE club_id = ?";
-        String insertTopicsSql = "INSERT INTO club_topics (club_id, topic_id) VALUES (?, ?)";
+        String sqlClub = "UPDATE clubs SET clubname = ?, description = ?, topics = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             // use a transaction to ensure all operations happen atomically
@@ -78,26 +43,13 @@ public class ClubDAO {
 
             PreparedStatement pstmt = conn.prepareStatement(sqlClub);
 
-            pstmt.setString(1, club.getClubName());
-            pstmt.setString(2, club.getDescription());
-            pstmt.setInt(3, club.getId());
+            pstmt.setString(1, club.getClubName());    // clubname
+            pstmt.setString(2, club.getDescription()); // description
+            pstmt.setString(3, club.getTopics());      // topics
+            pstmt.setInt(4, club.getId());             // id
+
             pstmt.executeUpdate();
 
-            // remove all old topics connected with club
-            PreparedStatement deleteOldTopicsStmt = conn.prepareStatement(deleteOldTopicsSql);
-            deleteOldTopicsStmt.setInt(1, club.getId());
-            deleteOldTopicsStmt.executeUpdate();
-
-            // insert new topics connected with club
-            PreparedStatement insertNewTopicsStmt = conn.prepareStatement(insertTopicsSql);
-
-            for (String topic : club.getTopics()) {
-                insertNewTopicsStmt.setInt(1, club.getId());
-                insertNewTopicsStmt.setInt(2, getTopicIdByTopicName(topic));
-                insertNewTopicsStmt.addBatch();
-            }
-
-            insertNewTopicsStmt.executeBatch();
             conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,16 +58,12 @@ public class ClubDAO {
 
     public void deleteClub(int clubId) {
         String sqlDeleteFromClub = "DELETE FROM clubs WHERE id = ?";
-        String sqlDeleteFromClubTopic = "DELETE FROM club_topics WHERE club_id = ?";
         Connection conn = null;
 
         try {
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             conn.setAutoCommit(false);
 
-            PreparedStatement pstmtClubTopic = conn.prepareStatement(sqlDeleteFromClubTopic);
-            pstmtClubTopic.setInt(1, clubId);
-            pstmtClubTopic.executeUpdate();
 
             PreparedStatement pstmtClub = conn.prepareStatement(sqlDeleteFromClub);
             pstmtClub.setInt(1, clubId);
@@ -146,7 +94,6 @@ public class ClubDAO {
 
     public Club getClub(int clubId) {
         String sqlClub = "SELECT * FROM clubs WHERE id = ?";
-        String sqlClubTopics = "SELECT t.name FROM topics t INNER JOIN club_topics ct ON t.id = ct.topic_id WHERE ct.club_id = ?";
 
         Club club = null;
 
@@ -158,17 +105,11 @@ public class ClubDAO {
 
             if (rsClub.next()) {
                 int id = rsClub.getInt("id");
-                String clubName = rsClub.getString("clubname");
+                String clubName = rsClub.getString("clubName");
                 String description = rsClub.getString("description");
+                String topics = rsClub.getString("topics");
 
-                List<String> topics = new ArrayList<>();
-                PreparedStatement pstmtTopics = conn.prepareStatement(sqlClubTopics);
-                pstmtTopics.setInt(1, clubId);
-                ResultSet rsTopics = pstmtTopics.executeQuery();
 
-                while (rsTopics.next()) {
-                    topics.add(rsTopics.getString("name"));
-                }
 
                 club = new Club(id, clubName, description, topics);
             }
@@ -181,7 +122,7 @@ public class ClubDAO {
 
     public List<Club> getAllClubs() {
         String sqlClubs = "SELECT * FROM clubs";
-        String sqlClubTopics = "SELECT t.name FROM topics t INNER JOIN club_topics ct ON t.id = ct.topic_id WHERE ct.club_id = ?";
+
         List<Club> clubs = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -190,17 +131,10 @@ public class ClubDAO {
 
             while (rsClubs.next()) {
                 int clubId = rsClubs.getInt("id");
-                String clubName = rsClubs.getString("clubname");
+                String clubName = rsClubs.getString("clubName");
                 String description = rsClubs.getString("description");
 
-                List<String> topics = new ArrayList<>();
-                PreparedStatement pstmtTopics = conn.prepareStatement(sqlClubTopics);
-                pstmtTopics.setInt(1, clubId);
-                ResultSet rsTopics = pstmtTopics.executeQuery();
-
-                while (rsTopics.next()) {
-                    topics.add(rsTopics.getString("name"));
-                }
+                String topics = rsClubs.getString("topics");
 
                 Club club = new Club(clubId, clubName, description, topics);
                 clubs.add(club);

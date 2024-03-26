@@ -18,6 +18,7 @@ public class LoginController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Button submitButton;
+    @FXML private Button registerButton;
     private AuthenticationService authService;
 
     public void initialize() {
@@ -34,7 +35,7 @@ public class LoginController {
                 try {
                     // Load the home screen's FXML file.
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/home-view.fxml")); // Replace with the path to your FXML file.
+                    loader.setLocation(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
                     Parent homeSceneParent = loader.load();
                     Scene homeScene = new Scene(homeSceneParent);
 
@@ -57,6 +58,23 @@ public class LoginController {
                 // clear fields
                 usernameField.clear();
                 passwordField.clear();
+            }
+        });
+        registerButton.setOnAction(event -> {
+            try {
+                // Load the Register screen's FXML file.
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/com/example/clubeventmanagementprogram/register-view.fxml"));
+                Parent registerSceneParent = loader.load();
+                Scene registerScene = new Scene(registerSceneParent);
+
+                // Get the current stage and set the scene, then show the stage.
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.setScene(registerScene);
+                window.show();
+            } catch (IOException e) {
+                // Here you should handle any exceptions that occur.
+                e.printStackTrace();
             }
         });
     }

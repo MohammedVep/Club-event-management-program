@@ -1,10 +1,8 @@
 package com.example.clubeventmanagementprogram.controller.clubActions;
-import com.example.clubeventmanagementprogram.controller.ClubController;
 import com.example.clubeventmanagementprogram.dao.ClubDAO;
 import com.example.clubeventmanagementprogram.model.Club;
 import com.example.clubeventmanagementprogram.service.ClubService;
 import com.example.clubeventmanagementprogram.service.ClubServiceImpl;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,18 +19,24 @@ public class DeleteClubController {
     private TableView<Club> clubsTable;
 
     @FXML
-    private Button deleteButton;
+    Button deleteButton;
     @FXML
-    private Button cancelButton;
+    Button cancelButton;
 
     private ClubDAO clubDAO = new ClubDAO();
     private ClubService clubService = new ClubServiceImpl(clubDAO); // passing ClubDAO instance
 
+    public DeleteClubController(TableView<Club> clubsTable){
+        this.clubsTable = clubsTable;
+    }
+
+    @FXML
     public void initialize() {
-        deleteButton.setOnAction(e -> handleDeleteAndLoadClubScene());
+        deleteButton.setOnAction(e -> deleteSelectedClub());
         cancelButton.setOnAction(e -> loadClubScene());
     }
 
+    @FXML
     private void deleteSelectedClub() {
         Club selectedClub = clubsTable.getSelectionModel().getSelectedItem();
 
@@ -41,18 +45,13 @@ public class DeleteClubController {
             clubsTable.getItems().remove(selectedClub);
             try {
                 // Load the clubs view
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/clubs-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/clubs-view.fxml"));
                 Parent clubsViewRoot = loader.load();
                 Scene clubsViewScene = new Scene(clubsViewRoot);
 
                 // Get the current Stage and set the scene to clubs view
                 Stage currentStage = (Stage) deleteButton.getScene().getWindow();
                 currentStage.setScene(clubsViewScene);
-
-                // Get a reference to ClubController instance
-                ClubController clubController = loader.getController();
-
-                // Then you can call any public methods on clubController, if needed
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -60,11 +59,12 @@ public class DeleteClubController {
             System.out.println("No Club selected in the table.");
         }
     }
+
     @FXML
     private void loadClubScene() {
         try {
             // Load Club scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/club.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/clubs-view.fxml"));
             Parent root = loader.load();
 
             // Create a new scene and load it to the stage
@@ -79,11 +79,5 @@ public class DeleteClubController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void handleDeleteAndLoadClubScene() {
-        deleteSelectedClub();
-        loadClubScene();
     }
 }

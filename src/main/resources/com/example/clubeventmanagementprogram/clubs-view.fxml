@@ -3,22 +3,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.ClubController">
     <children>
-        <Label fx:id="userLabel" layoutX="10.0" layoutY="10.0" text="User"/>
-        <Label fx:id="titleLabel" layoutX="275.0" layoutY="10.0" text="Manage clubs"/>
+        <Label fx:id="usernameLabel" layoutX="10.0" layoutY="10.0" text="User"/>
+        <Label fx:id="manageClubsLabel" layoutX="275.0" layoutY="10.0" text="Manage clubs"/>
         <Button fx:id="logoutButton" layoutX="560.0" layoutY="5.0" mnemonicParsing="false" text="Logout" onAction="#handleLogout"/>
 
-        <TableView fx:id="clubTable" editable="true" layoutX="14.0" layoutY="40.0" prefHeight="346.0" prefWidth="572.0">
+        <TableView fx:id="clubTableView" editable="true" layoutX="14.0" layoutY="40.0" prefHeight="346.0" prefWidth="572.0">
             <columns>
-                <TableColumn fx:id="clubName" prefWidth="150.0" text="Club name" />
-                <TableColumn fx:id="clubDescription" prefWidth="200.0" text="Club Description" />
-                <TableColumn fx:id="clubTopics" prefWidth="150.0" text="Topics" />
-                <TableColumn fx:id="clubDateAdded" prefWidth="100.0" text="Date Added" />
+                <TableColumn fx:id="checkboxColumn">
+                    <cellValueFactory><PropertyValueFactory property="selected"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="clubNameColumn" prefWidth="150.0" text="Club name" />
+                <TableColumn fx:id="descriptionColumn" prefWidth="200.0" text="Club Description" />
+                <TableColumn fx:id="topicsColumn" prefWidth="150.0" text="Topics" />
+                <TableColumn fx:id="dateAddedColumn" prefWidth="100.0" text="Date Added" />
             </columns>
         </TableView>
-        <Button layoutX="350.0" layoutY="320.0" mnemonicParsing="false" text="Add Club" onAction="#handleAddClub" />
-        <Button layoutX="400.0" layoutY="320.0" mnemonicParsing="false" text="Edit Club" onAction="#handleEditClub" />
-        <Button layoutX="450.0" layoutY="320.0" mnemonicParsing="false" text="Delete Club" onAction="#handleDeleteClub" />
+        <Button fx:id="addButton" layoutX="10.0" layoutY="320.0" mnemonicParsing="false" text="Add Club" onAction="#handleAddClub" />
+        <Button fx:id="editButton" layoutX="300.0" layoutY="320.0" mnemonicParsing="false" text="Edit Club" onAction="#handleEditClub" />
+        <Button fx:id="deleteButton" layoutX="450.0" layoutY="320.0" mnemonicParsing="false" text="Delete Club" onAction="#handleDeleteClub" />
     </children>
 </AnchorPane>

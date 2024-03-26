@@ -1,13 +1,18 @@
 package com.example.clubeventmanagementprogram.model;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class FinancialTransaction {
+public class FinancialTransaction implements Serializable {
     private int financial_id;
     private String transactionName;
     private LocalDate date;
     private String description;
     private double transactionAmount;
+    private BooleanProperty selected;
 
     // Constructor
     public FinancialTransaction(int financial_id, String transactionName, LocalDate date, String description, double transactionAmount) {
@@ -16,6 +21,7 @@ public class FinancialTransaction {
         this.date = date;
         this.description = description;
         this.transactionAmount = transactionAmount;
+        this.selected = new SimpleBooleanProperty(false);
     }
 
     // Getters and Setters
@@ -57,5 +63,16 @@ public class FinancialTransaction {
 
     public void setTransactionAmount(double transactionAmount) {
         this.transactionAmount = transactionAmount;
+    }
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public BooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
     }
 }

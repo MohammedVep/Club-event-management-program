@@ -27,15 +27,16 @@ public class AddClubController {
     @FXML
     private TextField clubDescriptionField;
 
-    private ObservableList<Club> clubs;
     @FXML
-    private TextArea topicsArea;
+    private TextField topicsField;
 
     @FXML
     Button addButton;
 
     @FXML
     Button cancelButton;
+    ClubDAO clubDao = new ClubDAO(); // Create DAO
+    ClubService clubService = new ClubServiceImpl(clubDao);
 
     @FXML
     public void initialize() {
@@ -47,29 +48,28 @@ public class AddClubController {
         // Save button action
         addButton.setOnAction(event -> {
             handleSaveAction(event);
-            loadClubScene();
         });
     }
 
-    public AddClubController(ObservableList<Club> clubs) {
-        this.clubs = clubs;
+    public AddClubController() {
     }
 
-    ClubDAO clubDao = new ClubDAO(); // Create DAO
+    public AddClubController(ObservableList<Club> clubs) {
+        this.clubService = new ClubServiceImpl(new ClubDAO());
+    }
+
 
     @FXML
     private void handleSaveAction(ActionEvent event) {
         try {
             String clubName = clubNameField.getText();
             String clubDescription = clubDescriptionField.getText();
-
-            // Fetch topics from the user's input and split into a list
-            List<String> topics = Arrays.asList(topicsArea.getText().split("\\n"));
-
+            String topics = topicsField.getText();
 
 
             // Add an ID for the club
-            int clubId = clubs.size() + 1;
+            List<Club> clubsFromDb = clubService.getAllClubs();
+            int clubId = clubsFromDb.size() + 1;
             Club newClub = new Club(clubId, clubName, clubDescription, topics);
             newClub.setId(clubId);
             // Persist club using DAO and service layer
@@ -77,15 +77,14 @@ public class AddClubController {
             clubService.addClub(newClub);
 
             // Load the clubs view
-            Parent clubsViewRoot = FXMLLoader.load(getClass().getResource("/Users/mohammedvepari/IdeaProjects/Club-event-management-program/src/main/resources/com/example/clubeventmanagementprogram/clubs-view.fxml"));
+            Parent clubsViewRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/clubs-view.fxml"));
             Scene clubsViewScene = new Scene(clubsViewRoot);
 
             // Get the current Stage and set the scene to clubs view
-            Stage currentStage = (Stage) clubNameField.getScene().getWindow();
+            Stage currentStage = (Stage) addButton.getScene().getWindow();
             currentStage.setScene(clubsViewScene);
 
         } catch (IOException e) {
-            // Either handle this exception more gracefully or rethrow it
             throw new RuntimeException(e);
         }
 
@@ -94,7 +93,7 @@ public class AddClubController {
     private void loadClubScene() {
         try {
             // Load Club scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/club.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/clubs-view.fxml"));
             Parent root = loader.load();
 
             // Create a new scene and load it to the stage
@@ -111,10 +110,6 @@ public class AddClubController {
         }
     }
 
-    @FXML
-    private void handleSaveAndLoadClubScene(ActionEvent event) {
-        handleSaveAction(event);
-        loadClubScene();
-    }
+
 
 }

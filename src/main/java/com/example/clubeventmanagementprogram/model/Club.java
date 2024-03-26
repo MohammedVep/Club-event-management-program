@@ -1,22 +1,44 @@
 package com.example.clubeventmanagementprogram.model;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
-public class Club {
+public class Club implements Serializable {
     private int id;
     private String clubName;
     private String description;
-    private List<String> topics;
+    private String topics;
+    private BooleanProperty selected;
 
-    public Club(int id, String name, String description, List<String> topics) {
+
+
+    public LocalDate getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(LocalDate dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    private LocalDate dateAdded;
+
+    public Club(int id, String name, String description, String topics) {
         this.id = id;
         this.clubName = name;
         this.description = description;
         this.topics = topics;
+        this.selected = new SimpleBooleanProperty(false);
     }
 
     public int getId() {
         return id;
+    }
+    public String getTopicsString() {
+        return String.join(", ", topics);
     }
 
     public void setId(int id) {
@@ -39,11 +61,22 @@ public class Club {
         this.description = description;
     }
 
-    public List<String> getTopics() {
+    public String getTopics() {
         return topics;
     }
 
-    public void setTopics(List<String> topics) {
+    public void setTopics(String topics) {
         this.topics = topics;
+    }
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public BooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
     }
 }

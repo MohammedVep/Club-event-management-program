@@ -24,4 +24,5 @@
     </GridPane>
 
     <Button fx:id="submitButton" text="Submit"/>
+    <Button fx:id="registerButton" text="Register"/>
 </VBox>

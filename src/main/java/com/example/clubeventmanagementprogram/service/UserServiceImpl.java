@@ -8,6 +8,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private UserDAO userDao;
+    public UserServiceImpl() {
+        // Initialization during construction
+        this.userDao = new UserDAO(); // Assuming UserDaoImpl is a concrete class that implements UserDao
+    }
     @Override
     public void addUser(User user) {
         userDao.addUser(user);

@@ -6,9 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 public class UserDAO {
-    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
-    private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "N7IR+fk”hbU#@";
+    private static final String URL = "jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres";
+    private static final String USERNAME = "edb_admin";
+    private static final String PASSWORD = "Rlo:On)YMYtL%Ob";
 
     private static final String FIND_BY_USERNAME_SQL = "SELECT * FROM users WHERE username = ?";
 

@@ -37,7 +37,7 @@ public class EventController implements IEventUpdatable{
     private Label usernameLabel;              // Display the Username at the upper left corner
 
     @FXML
-    private Label manageClubsLabel;           // Display the 'Manage Clubs' label at the center top
+    private Label manageEventsLabel;           // Display the 'Manage Clubs' label at the center top
 
     @FXML
     private Button logoutButton;

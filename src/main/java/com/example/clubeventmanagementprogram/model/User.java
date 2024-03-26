@@ -62,4 +62,6 @@ public class User implements Serializable {
     public void setSelected(boolean selected) {
         this.selected.set(selected);
     }
+
+
 }

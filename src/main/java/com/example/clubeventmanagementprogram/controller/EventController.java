@@ -1,7 +1,5 @@
 package com.example.clubeventmanagementprogram.controller;
 
-import com.example.clubeventmanagementprogram.controller.clubActions.DeleteClubController;
-import com.example.clubeventmanagementprogram.controller.clubActions.EditClubController;
 import com.example.clubeventmanagementprogram.controller.eventActions.DeleteEventController;
 import com.example.clubeventmanagementprogram.controller.eventActions.EditEventController;
 import com.example.clubeventmanagementprogram.dao.EventDAO;
@@ -34,10 +32,10 @@ import static com.example.clubeventmanagementprogram.utils.Context.eventService;
 public class EventController implements IEventUpdatable{
 
     @FXML
-    private Label usernameLabel;              // Display the Username at the upper left corner
+    private Label usernameLabel;
 
     @FXML
-    private Label manageEventsLabel;           // Display the 'Manage Clubs' label at the center top
+    private Label manageEventsLabel;
 
     @FXML
     private Button logoutButton;
@@ -137,7 +135,7 @@ public class EventController implements IEventUpdatable{
 
         } catch(IOException e) {
             // handle the exception (print stack trace or show an alert here)
-            System.err.println("Error loading Add Club page");
+            System.err.println("Error loading Add Event page");
             e.printStackTrace();
         }
     }
@@ -161,10 +159,10 @@ public class EventController implements IEventUpdatable{
                 currentStage.setScene(new Scene(editClubRoot));
             } else {
                 // Show some error message to the user or write some error log
-                System.err.println("No club was selected");
+                System.err.println("No event was selected");
             }
         } catch(IOException e){
-            System.err.println("Error loading Edit Club page");
+            System.err.println("Error loading Edit Event page");
             e.printStackTrace();
         }
     }
@@ -181,7 +179,7 @@ public class EventController implements IEventUpdatable{
             Stage currentStage = (Stage) source.getScene().getWindow();
             currentStage.setScene(deleteEventScene);
         } catch(IOException e){
-            System.err.println("Error loading Delete Club page");
+            System.err.println("Error loading Delete Event page");
             e.printStackTrace();
         }
     }

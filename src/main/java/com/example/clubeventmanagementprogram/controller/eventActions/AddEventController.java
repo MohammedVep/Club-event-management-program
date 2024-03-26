@@ -49,6 +49,9 @@ public class AddEventController {
 
     @FXML
     public void initialize(){
+        saveButton.setOnAction(event -> {
+            handleSaveAction(event);
+        });
         cancelButton.setOnAction(event -> {
             loadEventScene(event);
         });

@@ -10,6 +10,31 @@ public class UserDAO {
     private static final String USERNAME = "edb_admin";
     private static final String PASSWORD = "Rlo:On)YMYtL%Ob";
 
+    private static final String FIND_BY_USERNAME_SQL = "SELECT * FROM users WHERE username = ?";
+
+    public User findByUsername(String username) {
+        User user = null;
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             PreparedStatement stmt = connection.prepareStatement(FIND_BY_USERNAME_SQL)) {
+
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+
+                // assuming User class has a constructor User(int id, String name, String password)
+                user = new User(id, name, email, password);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding user by username", e);
+        }
+        return user;
+    }
+
     private Connection connect() throws SQLException {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }

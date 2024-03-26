@@ -112,9 +112,9 @@ public class EditEventController {
     }
 
     @FXML
-    void loadEventScene() {
+    public void loadEventScene() {
         try {
-            // Load Club scene
+            // Load Event scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/events-view.fxml"));
             Parent root = loader.load();
 

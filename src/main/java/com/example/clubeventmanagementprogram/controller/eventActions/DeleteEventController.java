@@ -66,9 +66,7 @@ public class DeleteEventController {
     }
 
     @FXML
-    void loadEventScene() {
-        // Implement logic to load the previous event scene here
-        // For demonstration purposes, let's just close the current stage
+    public void loadEventScene() {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/events-view.fxml"));
             Parent root = loader.load();

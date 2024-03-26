@@ -77,9 +77,12 @@ public class GenerateReportsController {
 
     private void navigateToHomePage() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml")); // replace with your home page FXML file path
-            Scene homePageScene = new Scene(root);
-            mainStage.setScene(homePageScene);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            Stage stage = (Stage) noButton.getScene().getWindow();
+            stage.setScene(scene);
         } catch (IOException e) {
             System.err.println("Failed to load the home page: " + e.getMessage());
             e.printStackTrace();

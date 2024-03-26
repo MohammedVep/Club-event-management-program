@@ -6,6 +6,10 @@ import java.util.List;
 public class EventServiceImpl implements EventService{
 
     private EventDAO eventDao;
+
+    public EventServiceImpl(EventDAO eventDAO) {
+        this.eventDao = eventDAO;
+    }
     @Override
     public void addEvent(Event event) {
         eventDao.createEvent(event);

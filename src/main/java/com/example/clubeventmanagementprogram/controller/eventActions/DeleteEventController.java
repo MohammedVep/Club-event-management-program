@@ -1,39 +1,83 @@
-package com.example.clubeventmanagementprogram.controller.clubActions;
+package com.example.clubeventmanagementprogram.controller.eventActions;
 
+import com.example.clubeventmanagementprogram.dao.EventDAO;
+import com.example.clubeventmanagementprogram.model.Club;
+import com.example.clubeventmanagementprogram.model.Event;
+import com.example.clubeventmanagementprogram.service.EventService;
+import com.example.clubeventmanagementprogram.service.EventServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class DeleteEventController {
 
     @FXML
-    private GridPane deleteEventGridPane;
+    private TableView<Event> eventsTable;
 
     @FXML
-    private Button yesButton;
+    Button yesButton;
 
     @FXML
-    private Button noButton;
+    Button noButton;
 
-    @FXML
-    void handleDeleteEvent(ActionEvent event) {
-        // Implement deletion logic here
-        // For demonstration purposes, let's just show an alert
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Event Deletion");
-        alert.setHeaderText(null);
-        alert.setContentText("Event deleted successfully!");
-        alert.showAndWait();
+    private EventDAO eventDAO = new EventDAO();
+    private EventService eventService = new EventServiceImpl(eventDAO);
 
-        // You would typically have code here to delete the event from the system/database
+    public DeleteEventController(TableView<Event> eventsTable){
+        this.eventsTable = eventsTable;
     }
 
     @FXML
-    void loadEventScene(ActionEvent event) {
+    public void initalize(){
+        yesButton.setOnAction(e -> deleteSelectedEvent());
+        noButton.setOnAction(e -> loadEventScene());
+    }
+    @FXML
+    void deleteSelectedEvent() {
+        Event selectedEvent = eventsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedEvent != null) {
+            eventService.deleteEvent(selectedEvent.getId());
+            eventsTable.getItems().remove(selectedEvent);
+            try {
+                // Load the events view
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/events-view.fxml"));
+                Parent eventsViewRoot = loader.load();
+                Scene eventsViewScene = new Scene(eventsViewRoot);
+
+                // Get the current Stage and set the scene to events view
+                Stage currentStage = (Stage) noButton.getScene().getWindow();
+                currentStage.setScene(eventsViewScene);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("No Club selected in the table.");
+        }
+    }
+
+    @FXML
+    void loadEventScene() {
         // Implement logic to load the previous event scene here
         // For demonstration purposes, let's just close the current stage
-        noButton.getScene().getWindow().hide();
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/events-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) noButton.getScene().getWindow();
+            stage.setScene(scene);
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

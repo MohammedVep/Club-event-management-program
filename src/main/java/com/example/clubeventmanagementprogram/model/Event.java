@@ -13,11 +13,11 @@ public class Event implements Serializable {
     private String eventName;
     private String description;
     private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private String startTime;
+    private String endTime;
     private BooleanProperty selected;
 
-    public Event(int id, String eventName, String description, LocalDate date, LocalTime startTime, LocalTime endTime){
+    public Event(int id, String eventName, String description, LocalDate date, String startTime, String endTime){
         this.id = id;
         this.eventName = eventName;
         this.description = description;
@@ -59,19 +59,19 @@ public class Event implements Serializable {
         this.date = date;
     }
 
-    public LocalTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public LocalTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
     public boolean isSelected() {

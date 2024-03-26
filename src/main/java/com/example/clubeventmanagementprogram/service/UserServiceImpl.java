@@ -12,6 +12,10 @@ public class UserServiceImpl implements UserService {
         // Initialization during construction
         this.userDao = new UserDAO(); // Assuming UserDaoImpl is a concrete class that implements UserDao
     }
+
+    public UserServiceImpl(UserDAO userDao) {
+        this.userDao = userDao;
+    }
     @Override
     public void addUser(User user) {
         userDao.addUser(user);

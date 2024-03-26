@@ -1,4 +1,5 @@
 package com.example.clubeventmanagementprogram.controller;
 
-public class UserController implements IUserUpdatable{
+public interface IUserUpdatable {
+    void updateUserTable();
 }

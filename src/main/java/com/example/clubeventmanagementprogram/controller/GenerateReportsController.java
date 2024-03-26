@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -23,6 +24,12 @@ public class GenerateReportsController {
 
     private Stage mainStage;
 
+    @FXML
+    Button yesButton;
+
+    @FXML
+    Button noButton;
+
     public void setMainStage(Stage stage) {
         this.mainStage = stage;
     }
@@ -32,13 +39,12 @@ public class GenerateReportsController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Generate Reports");
         alert.setHeaderText("Are you sure you want to generate financial history?");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        yesButton.setOnAction(event -> {
             generateFinancialHistory();
-        } else {
+        });
+        noButton.setOnAction(event -> {
             navigateToHomePage();
-        }
+        });
     }
 
     private void generateFinancialHistory() {
@@ -78,15 +84,5 @@ public class GenerateReportsController {
             System.err.println("Failed to load the home page: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void onYesButtonClick(ActionEvent event) {
-        generateFinancialHistory();
-    }
-
-    @FXML
-    void onNoButtonClick(ActionEvent event) {
-        navigateToHomePage();
     }
 }

@@ -141,7 +141,21 @@ public class HomeController {
         });
 
         reportsButton.setOnAction(event -> {
-            // Load Reports scene
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/generate-reports.fxml"));
+                Parent root = loader.load();
+
+                Scene scene = new Scene(root, 600, 400);
+
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+
+                stage.setTitle("Generate Reports");
+                stage.show();
+            } catch (IOException e){
+                System.err.println("Failed to load Generate Reports");
+                e.printStackTrace();
+            }
         });
     }
 }

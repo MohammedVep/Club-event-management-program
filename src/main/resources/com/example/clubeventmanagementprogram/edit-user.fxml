@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.userActions.AddUserController">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.userActions.EditUserController">
     <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
@@ -13,6 +13,6 @@
     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
     <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-    <Button onAction="#handleSaveUser" text="Save" GridPane.rowIndex="3" />
+    <Button fx:id="saveButton" onAction="#handleSaveUser" text="Save" GridPane.rowIndex="3" />
     <Button fx:id="cancelButton" onAction="#loadUserScene" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 </GridPane>

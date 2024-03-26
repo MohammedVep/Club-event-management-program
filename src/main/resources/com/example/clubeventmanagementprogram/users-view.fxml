@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.clubeventmanagementprogram.UsersView"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.UserController">
+    <children>
+        <Label fx:id="usernameLabel" layoutX="10.0" layoutY="10.0" text="User"/>
+        <Label fx:id="manageUsersLabel" layoutX="275.0" layoutY="10.0" text="Manage User"/>
+        <Button fx:id="logoutButton" layoutX="560.0" layoutY="5.0" mnemonicParsing="false" text="Logout" onAction="#handleLogout"/>
 
+        <TableView fx:id="userTableView" editable="true" layoutX="14.0" layoutY="40.0" prefHeight="346.0" prefWidth="572.0">
+            <columns>
+                <TableColumn fx:id="checkBoxColumn">
+                    <cellValueFactory><PropertyValueFactory property="selected"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="userNameColumn" prefWidth="150.0" text="User name" />
+                <TableColumn fx:id="emailColumn" prefWidth="200.0" text="Email" />
+                <TableColumn fx:id="passwordColumn" prefWidth="150.0" text="Password" />
+            </columns>
+        </TableView>
+        <Button fx:id="addButton" layoutX="10.0" layoutY="320.0" mnemonicParsing="false" text="Add Event" onAction="#handleAddUser" />
+        <Button fx:id="editButton" layoutX="300.0" layoutY="320.0" mnemonicParsing="false" text="Edit Event" onAction="#handleEditUser" />
+        <Button fx:id="deleteButton" layoutX="450.0" layoutY="320.0" mnemonicParsing="false" text="Delete Event" onAction="#handleDeleteUser" />
+    </children>
 </AnchorPane>

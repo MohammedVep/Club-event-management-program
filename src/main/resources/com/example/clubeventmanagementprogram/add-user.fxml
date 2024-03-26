@@ -13,6 +13,6 @@
     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
     <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-    <Button onAction="#handleSaveUser" text="Save" GridPane.rowIndex="3" />
+    <Button fx:id="saveButton" onAction="#handleSaveUser" text="Save" GridPane.rowIndex="3" />
     <Button fx:id="cancelButton" onAction="#loadUserScene" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 </GridPane>

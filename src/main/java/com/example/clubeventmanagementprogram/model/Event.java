@@ -16,7 +16,6 @@ public class Event implements Serializable {
     private String endTime;
     private BooleanProperty selected;
 
-
     public Event(int id, String eventName, String description, LocalDate date, String startTime, String endTime){
         this.id = id;
         this.eventName = eventName;

@@ -15,9 +15,9 @@
                 <TableColumn fx:id="checkBoxColumn">
                     <cellValueFactory><PropertyValueFactory property="selected"/></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="eventNameColumn" prefWidth="150.0" text="Event name" />
-                <TableColumn fx:id="eventDescriptionColumn" prefWidth="200.0" text="Event Description" />
-                <TableColumn fx:id="dateColumn" prefWidth="150.0" text="Date" />
+                <TableColumn fx:id="eventNameColumn" prefWidth="75.0" text="Event name" />
+                <TableColumn fx:id="eventDescriptionColumn" prefWidth="100.0" text="Event Description" />
+                <TableColumn fx:id="dateColumn" prefWidth="50.0" text="Date" />
                 <TableColumn fx:id="startTimeColumn" prefWidth="100.0" text="Start time" />
                 <TableColumn fx:id="endTimeColumn" prefWidth="100.0" text="End time" />
             </columns>

@@ -70,7 +70,7 @@ public class EventController implements IEventUpdatable{
     private Button editButton;                // Place the 'Edit' button below the table
     @FXML
     private Button deleteButton;              // Place the 'Delete' button below the table
-
+    private ObservableList<Event> eventData = FXCollections.observableArrayList();
     private Event currentEvent;
 
     @Override
@@ -80,15 +80,10 @@ public class EventController implements IEventUpdatable{
         eventData.addAll(updatedList);
     }
 
-    private ObservableList<Event> eventData = FXCollections.observableArrayList();
 
-    private void loadEventData(){
-        EventService eventService = Context.getEventService();
-        List<Event> eventsFromDb = eventService.getAllEvents();
-        eventData.addAll(eventsFromDb);
-    }
 
-    public void initalize() {
+
+    public void initialize() {
         logoutButton.setOnAction(event -> handleLogout(event));
         addButton.setOnAction(event -> handleAddEvent(event));
         editButton.setOnAction(event -> handleEditEvent(event));
@@ -104,6 +99,12 @@ public class EventController implements IEventUpdatable{
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         eventTableView.setItems(eventData);
         loadEventData();
+    }
+
+    private void loadEventData(){
+        EventService eventService = Context.getEventService();
+        List<Event> eventsFromDb = eventService.getAllEvents();
+        eventData.addAll(eventsFromDb);
     }
 
     @FXML

@@ -4,8 +4,6 @@ import com.example.clubeventmanagementprogram.model.Event;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.Date;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +21,12 @@ public class EventDAO {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                int eventId = rs.getInt("id");
-                String eventName = rs.getString("EventName");
-                String description = rs.getString("Description");
-                LocalDate date = rs.getDate("Date").toLocalDate();
-                String startTime = rs.getString("StartTime");
-                String endTime = rs.getString("EndTime");
+                int eventId = rs.getInt("eventid");
+                String eventName = rs.getString("eventname");
+                String description = rs.getString("description");
+                LocalDate date = rs.getDate("date").toLocalDate();
+                String startTime = rs.getString("starttime");
+                String endTime = rs.getString("endtime");
 
                 event = new Event(eventId, eventName, description, date, startTime, endTime);
             }
@@ -49,7 +47,7 @@ public class EventDAO {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("eventid");
                 String eventName = rs.getString("EventName");
                 String description = rs.getString("Description");
                 LocalDate date = rs.getDate("Date").toLocalDate();
@@ -75,7 +73,7 @@ public class EventDAO {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("eventid");
                 String eventName = rs.getString("EventName");
                 String description = rs.getString("Description");
                 LocalDate date = rs.getDate("Date").toLocalDate();

@@ -33,6 +33,9 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
     @FXML
     private Label manageFinancialTransactionsLabel;
 
+    @FXML
+    private Button backButton;
+
     private FinancialTransaction currentFinancialTransaction;
 
     @FXML
@@ -82,7 +85,7 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
         addButton.setOnAction(event -> handleAddFinancialTransaction(event));
         editButton.setOnAction(event -> handleEditFinancialTransaction(event));
         deleteButton.setOnAction(event -> handleDeleteFinancialTransaction(event));
-
+        backButton.setOnAction(event -> handleGoBack(event));
         // Set cell value factory
         checkboxColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
 // Set cell factory
@@ -95,6 +98,24 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
         loadFinancialTransactionData();
     }
 
+    @FXML
+    private void handleGoBack(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage currentStage;
+        try {
+            // Load the home screen
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
+            Scene loginScene = new Scene(fxmlLoader.load());
+
+            // Get the current stage
+            currentStage = (Stage) source.getScene().getWindow();
+
+            // Set the home scene to the current stage
+            currentStage.setScene(loginScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void handleLogout(ActionEvent event) {
         Node source = (Node) event.getSource();

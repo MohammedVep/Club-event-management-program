@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -31,6 +32,9 @@ public class ClubController implements IClubUpdatable{
 
     @FXML
     private Label usernameLabel;              // Display the Username at the upper left corner
+
+    @FXML
+    private Button backButton;
 
     @FXML
     private Label manageClubsLabel;           // Display the 'Manage Clubs' label at the center top
@@ -85,10 +89,11 @@ public class ClubController implements IClubUpdatable{
         // Set up `logoutButton` to call `handleLogout()`
         logoutButton.setOnAction(event -> handleLogout(event));
 
-        // Set up add, edit, and delete buttons
+        // Set up add, edit, delete and backButtons buttons
         addButton.setOnAction(event -> handleAddClub(event));
         editButton.setOnAction(event -> handleEditClub(event));
         deleteButton.setOnAction(event -> handleDeleteClub(event));
+        backButton.setOnAction(event -> handleGoBack(event));
 
         // Set up table columns to pull data from Club objects
         // Set cell value factory
@@ -104,6 +109,25 @@ public class ClubController implements IClubUpdatable{
 
         // Load the club data from the database
         loadClubData();
+    }
+
+    @FXML
+    private void handleGoBack(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage currentStage;
+        try {
+            // Load the home screen
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
+            Scene loginScene = new Scene(fxmlLoader.load());
+
+            // Get the current stage
+            currentStage = (Stage) source.getScene().getWindow();
+
+            // Set the home scene to the current stage
+            currentStage.setScene(loginScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

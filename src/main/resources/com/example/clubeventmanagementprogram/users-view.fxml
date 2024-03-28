@@ -8,8 +8,8 @@
     <children>
         <Label fx:id="usernameLabel" layoutX="10.0" layoutY="10.0" text="User"/>
         <Label fx:id="manageUsersLabel" layoutX="275.0" layoutY="10.0" text="Manage User"/>
-        <Button fx:id="logoutButton" layoutX="560.0" layoutY="5.0" mnemonicParsing="false" text="Logout" onAction="#handleLogout"/>
-
+        <Button fx:id="logoutButton" layoutX="560.0" layoutY="10.0" mnemonicParsing="false" text="Logout" onAction="#handleLogout"/>
+        <Button fx:id="backButton" layoutX="100.0" layoutY="10.0" text="Go back" mnemonicParsing="false" onAction="#handleGoBack" />
         <TableView fx:id="userTableView" editable="true" layoutX="14.0" layoutY="40.0" prefHeight="346.0" prefWidth="572.0">
             <columns>
                 <TableColumn fx:id="checkBoxColumn">

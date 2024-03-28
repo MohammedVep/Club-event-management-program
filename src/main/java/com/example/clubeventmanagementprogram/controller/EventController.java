@@ -41,6 +41,9 @@ public class EventController implements IEventUpdatable{
     private Button logoutButton;
 
     @FXML
+    private Button backButton;
+
+    @FXML
     private TableView<Event> eventTableView;
 
     @FXML
@@ -90,7 +93,7 @@ public class EventController implements IEventUpdatable{
         addButton.setOnAction(event -> handleAddEvent(event));
         editButton.setOnAction(event -> handleEditEvent(event));
         deleteButton.setOnAction(event -> handleDeleteEvent(event));
-
+        backButton.setOnAction(event -> handleGoBack(event));
         checkBoxColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
 // Set cell factory
         checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
@@ -116,6 +119,24 @@ public class EventController implements IEventUpdatable{
             currentStage = (Stage) source.getScene().getWindow();
 
             // Set the login scene to the current stage
+            currentStage.setScene(loginScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void handleGoBack(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage currentStage;
+        try {
+            // Load the home screen
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
+            Scene loginScene = new Scene(fxmlLoader.load());
+
+            // Get the current stage
+            currentStage = (Stage) source.getScene().getWindow();
+
+            // Set the home scene to the current stage
             currentStage.setScene(loginScene);
         } catch (IOException e) {
             e.printStackTrace();

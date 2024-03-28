@@ -44,6 +44,9 @@ public class UserController implements IUserUpdatable{
     private Button logoutButton;
 
     @FXML
+    private Button backButton;
+
+    @FXML
     private TableView<User> userTableView;
     @FXML
     private TableColumn<User, Boolean> checkBoxColumn;
@@ -86,6 +89,7 @@ public class UserController implements IUserUpdatable{
         addButton.setOnAction(event -> handleAddUser(event));
         editButton.setOnAction(event -> handleEditUser(event));
         deleteButton.setOnAction(event -> handleDeleteUser(event));
+        backButton.setOnAction(event -> handleGoBack(event));
         checkBoxColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
         checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
         userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
@@ -93,6 +97,25 @@ public class UserController implements IUserUpdatable{
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         userTableView.setItems(userData);
         loadUserData();
+    }
+
+    @FXML
+    private void handleGoBack(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage currentStage;
+        try {
+            // Load the home screen
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
+            Scene loginScene = new Scene(fxmlLoader.load());
+
+            // Get the current stage
+            currentStage = (Stage) source.getScene().getWindow();
+
+            // Set the home scene to the current stage
+            currentStage.setScene(loginScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

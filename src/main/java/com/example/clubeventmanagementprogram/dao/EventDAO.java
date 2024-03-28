@@ -41,7 +41,7 @@ public class EventDAO {
     }
 
     public List<Event> getTop5Events() {
-        String sql = "SELECT * FROM events WHERE eventId <= 5";
+        String sql = "SELECT * FROM events ORDER BY date DESC LIMIT 5";
         List<Event> events = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -103,8 +103,8 @@ public class EventDAO {
             pstmt.setString(1, event.getEventName());
             pstmt.setString(2, event.getDescription());
             pstmt.setDate(3, java.sql.Date.valueOf(event.getDate()));
-            pstmt.setTime(4, java.sql.Time.valueOf(event.getStartTime()));
-            pstmt.setTime(5, java.sql.Time.valueOf(event.getEndTime()));
+            pstmt.setString(4, event.getStartTime());
+            pstmt.setString(5, event.getEndTime());
             pstmt.executeUpdate();
             conn.commit();
 
@@ -122,8 +122,8 @@ public class EventDAO {
             pstmt.setString(1, event.getEventName());
             pstmt.setString(2, event.getDescription());
             pstmt.setDate(3, java.sql.Date.valueOf(event.getDate()));
-            pstmt.setTime(4, java.sql.Time.valueOf(event.getStartTime()));
-            pstmt.setTime(5, java.sql.Time.valueOf(event.getEndTime()));
+            pstmt.setString(4, event.getStartTime());
+            pstmt.setString(5, event.getEndTime());
             pstmt.setInt(6, event.getId());
             pstmt.executeUpdate();
             conn.commit();

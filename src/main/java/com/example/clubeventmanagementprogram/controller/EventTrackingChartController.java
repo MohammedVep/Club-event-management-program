@@ -44,6 +44,9 @@ public class EventTrackingChartController {
     @FXML
     Button backButton;
 
+    @FXML
+    Button logoutButton;
+
     public void initialize() {
         backButton.setOnAction(this::handleGoBack);
 
@@ -70,6 +73,25 @@ public class EventTrackingChartController {
             currentStage = (Stage) source.getScene().getWindow();
 
             // Set the home scene to the current stage
+            currentStage.setScene(loginScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Stage currentStage;
+        try {
+            // Load the login screen
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/login-view.fxml"));
+            Scene loginScene = new Scene(fxmlLoader.load());
+
+            // Get the current stage
+            currentStage = (Stage) source.getScene().getWindow();
+
+            // Set the login scene to the current stage
             currentStage.setScene(loginScene);
         } catch (IOException e) {
             e.printStackTrace();

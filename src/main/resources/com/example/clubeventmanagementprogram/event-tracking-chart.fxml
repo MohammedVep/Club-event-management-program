@@ -7,6 +7,7 @@
    <children>
       <Button fx:id="backButton" layoutX="100.0" layoutY="10.0" text="Go back" mnemonicParsing="false" onAction="#handleGoBack" />
       <Label fx:id="trackEventsLabel" layoutX="275.0" layoutY="10.0" text="Track Events" />
+      <Button fx:id="logoutButton" layoutX="450.0" layoutY="5.0" mnemonicParsing="false" text="Logout" onAction="#handleLogout"/>
       <TableView fx:id="eventTable" editable="true" layoutX="14.0" layoutY="40.0" prefHeight="346.0" prefWidth="572.0">
          <columns>
             <TableColumn fx:id="eventNameColumn" text="Event Name" />

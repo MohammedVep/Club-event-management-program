@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.clubeventmanagementprogram.controller.EventTrackingChartController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.EventTrackingChart">
+   <children>
+      <HBox layoutX="21.0" layoutY="67.0" prefHeight="319.0" prefWidth="566.0">
+         <children>
+            <SplitPane prefHeight="292.0" prefWidth="158.0">
+               <items>
+                  <Label contentDisplay="TOP" prefHeight="40.0" prefWidth="156.0" text="Upcoming Events" />
+               </items></SplitPane>
+            <SplitPane prefHeight="372.0" prefWidth="102.0">
+               <items>
+                  <Label contentDisplay="TOP" prefHeight="40.0" prefWidth="156.0" text="Attendance" />
+               </items></SplitPane>
+            <SplitPane prefHeight="372.0" prefWidth="161.0">
+               <items>
+                  <Label contentDisplay="TOP" prefHeight="40.0" prefWidth="163.0" text="Description" />
+               </items></SplitPane>
+            <SplitPane layoutX="226.0" layoutY="10.0" prefHeight="372.0" prefWidth="142.0">
+               <items>
+                  <Label contentDisplay="TOP" prefHeight="40.0" prefWidth="163.0" text="Date and Time" />
+               </items></SplitPane>
+         </children>
+      </HBox>
+      <Label layoutX="200.0" layoutY="26.0" prefHeight="18.0" prefWidth="199.0" text="Event Tracking Dashboard">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

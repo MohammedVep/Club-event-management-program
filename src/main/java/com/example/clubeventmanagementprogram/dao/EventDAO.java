@@ -40,6 +40,32 @@ public class EventDAO {
         return event;
     }
 
+    public List<Event> getTop5Events() {
+        String sql = "SELECT * FROM events WHERE eventId <= 5";
+        List<Event> events = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String eventName = rs.getString("EventName");
+                String description = rs.getString("Description");
+                LocalDate date = rs.getDate("Date").toLocalDate();
+                String startTime = rs.getString("StartTime");
+                String endTime = rs.getString("EndTime");
+
+                Event event = new Event(id, eventName, description, date, startTime, endTime);
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return events;
+    }
+
     public List<Event> getAllEvents() {
         String sql = "SELECT * FROM events";
         List<Event> events = new ArrayList<>();

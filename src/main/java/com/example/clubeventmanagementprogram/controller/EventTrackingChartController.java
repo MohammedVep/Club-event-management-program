@@ -1,31 +1,78 @@
 package com.example.clubeventmanagementprogram.controller;
-
+import com.example.clubeventmanagementprogram.dao.EventDAO;
+import com.example.clubeventmanagementprogram.model.Event;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.List;
 
 public class EventTrackingChartController {
 
+    EventDAO eventDao = new EventDAO();
+
     @FXML
-    private BarChart<String, Number> barChart;
+    private Label trackEventsLabel;
+
+    @FXML
+    private TableView<Event> eventTable;
+
+    @FXML
+    private TableColumn<Event, String> eventNameColumn;
+
+    @FXML
+    private TableColumn<Event, String> eventDescriptionColumn;
+
+    @FXML
+    private TableColumn<Event, String> dateColumn;
+
+    @FXML
+    private TableColumn<Event, String> startTimeColumn;
+
+    @FXML
+    private TableColumn<Event, String> endTimeColumn;
+
+    @FXML
+    Button backButton;
 
     public void initialize() {
-        barChart.setTitle("Event Tracking Data");
+        backButton.setOnAction(this::handleGoBack);
 
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
+        eventNameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("eventName"));
+        eventDescriptionColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("description"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
+        startTimeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("startTime"));
+        endTimeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("endTime"));
 
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Event Counts");
+        List<Event> events = eventDao.getTop5Events();
+        eventTable.getItems().setAll(events);
+    }
 
-        // Add data to the series (you can fetch this data from your database)
-        series.getData().add(new XYChart.Data<>("Event 1", 10));
-        series.getData().add(new XYChart.Data<>("Event 2", 20));
-        series.getData().add(new XYChart.Data<>("Event 3", 15));
-        series.getData().add(new XYChart.Data<>("Event 4", 30));
+    @FXML
+    private void handleGoBack(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage currentStage;
+        try {
+            // Load the home screen
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
+            Scene loginScene = new Scene(fxmlLoader.load());
 
-        barChart.getData().add(series);
+            // Get the current stage
+            currentStage = (Stage) source.getScene().getWindow();
+
+            // Set the home scene to the current stage
+            currentStage.setScene(loginScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

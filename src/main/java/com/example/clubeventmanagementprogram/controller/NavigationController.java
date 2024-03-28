@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class NavigationController {
-
+    private Stage mainStage;
     private UserService userService;
     private ObservableList<User> users;
 
@@ -30,11 +30,28 @@ public class NavigationController {
             registrationController.setUserService(userService);
             registrationController.setUsers(users);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            mainStage.setScene(new Scene(root));
+            mainStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goToLoginView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/login-view.fxml"));
+            Parent root = loader.load();
+            LoginController loginController = loader.getController();
+            loginController.setUserService(userService);
+            loginController.setUsers(users);
+            mainStage.setScene(new Scene(root));
+            mainStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setMainStage(Stage mainStage) {
+        this.mainStage = mainStage;
     }
 }

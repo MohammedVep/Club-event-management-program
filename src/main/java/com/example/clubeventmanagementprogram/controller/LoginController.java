@@ -1,5 +1,9 @@
 package com.example.clubeventmanagementprogram.controller;
+import com.example.clubeventmanagementprogram.model.User;
 import com.example.clubeventmanagementprogram.service.AuthenticationService;
+import com.example.clubeventmanagementprogram.service.UserService;
+import com.example.clubeventmanagementprogram.service.UserServiceImpl;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -21,11 +25,27 @@ public class LoginController {
     @FXML private Button registerButton;
     private AuthenticationService authService;
 
+    private UserService userService;
+
+    private ObservableList<User> users;
+    NavigationController navigationController;
+
+
     public void initialize() {
         authService = new AuthenticationService();
         setupButtonActions();
     }
+    public void setNavigationController(NavigationController navigationController) {
+        this.navigationController = navigationController;
+    }
 
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void setUsers(ObservableList<User> users) {
+        this.users = users;
+    }
     private void setupButtonActions() {
         submitButton.setOnAction(event -> {
             String username = usernameField.getText().trim();
@@ -61,21 +81,7 @@ public class LoginController {
             }
         });
         registerButton.setOnAction(event -> {
-            try {
-                // Load the Register screen's FXML file.
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/com/example/clubeventmanagementprogram/register-view.fxml"));
-                Parent registerSceneParent = loader.load();
-                Scene registerScene = new Scene(registerSceneParent);
-
-                // Get the current stage and set the scene, then show the stage.
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(registerScene);
-                window.show();
-            } catch (IOException e) {
-                // Here you should handle any exceptions that occur.
-                e.printStackTrace();
-            }
+            navigationController.goToRegisterView();
         });
     }
 }

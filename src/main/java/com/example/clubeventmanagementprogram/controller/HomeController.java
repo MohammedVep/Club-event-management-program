@@ -129,7 +129,26 @@ public class HomeController {
         });
 
         trackButton.setOnAction(event -> {
-            // Load Track scene
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/event-tracking-chart.fxml"));
+                Parent root = loader.load();
+                // Create a new scene
+                Scene scene = new Scene(root, 600, 400); // you can specify preferred scene dimensions (e.g., 600x400 here)
+
+                // Get current stage and set the new scene onto it
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+
+                // set the new window title
+                stage.setTitle("Manage Events");
+
+                // Show the new scene
+                stage.show();
+
+            } catch (IOException e){
+                System.err.println("Failed to load Manage Events Page");
+                e.printStackTrace();
+            }
         });
 
         financialButton.setOnAction(event -> {

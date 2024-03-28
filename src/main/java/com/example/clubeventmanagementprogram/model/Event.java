@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 
 public class Event implements Serializable {
@@ -16,6 +15,7 @@ public class Event implements Serializable {
     private String startTime;
     private String endTime;
     private BooleanProperty selected;
+
 
     public Event(int id, String eventName, String description, LocalDate date, String startTime, String endTime){
         this.id = id;
@@ -85,4 +85,5 @@ public class Event implements Serializable {
     public void setSelected(boolean selected) {
         this.selected.set(selected);
     }
+
 }

@@ -15,7 +15,9 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import java.awt.Desktop;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -58,18 +60,33 @@ public class GenerateReportsController {
 
             PDPageContentStream contentStream = new PDPageContentStream(doc, page);
             contentStream.beginText();
-            contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+            contentStream.setFont(PDType1Font.COURIER, 12);
             contentStream.newLineAtOffset(25, 700);
 
+            String format = "%-10s%-20s%-40s%-10s=";
+            contentStream.showText(String.format(format, "DATE", "TRANSACTION", "DESCRIPTION", "AMOUNT")); // Header
+            contentStream.newLineAtOffset(0, -15);
+
             for (FinancialTransaction transaction : transactions) {
-                String text = transaction.toString(); // make sure to override toString() in FinancialTransaction to format your output
-                contentStream.showText(text);
+                contentStream.showText(String.format(format, transaction.getDate(),
+                        transaction.getTransactionName(), transaction.getDescription(), transaction.getTransactionAmount()));
                 contentStream.newLineAtOffset(0, -15);
             }
+
             contentStream.endText();
             contentStream.close();
 
-            doc.save("FinancialHistory.pdf");
+            String userDesktop = System.getProperty("user.home") + "/Desktop/";
+            doc.save(userDesktop + "FinancialHistory.pdf");
+            File file = new File(userDesktop + "FinancialHistory.pdf");
+
+            if(file.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(file);
+                } else {
+                    System.err.println("Desktop is not supported");
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

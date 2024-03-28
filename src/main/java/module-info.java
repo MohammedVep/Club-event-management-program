@@ -13,6 +13,7 @@ module com.example.clubeventmanagementprogram {
     requires kernel;
     requires layout;
     requires org.apache.pdfbox;
+    requires java.desktop;
 
     opens com.example.clubeventmanagementprogram to javafx.fxml;
     exports com.example.clubeventmanagementprogram.application;

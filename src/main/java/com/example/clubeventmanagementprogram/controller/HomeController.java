@@ -87,7 +87,7 @@ public class HomeController {
                 Parent root = loader.load();
 
                 // Create a new scene
-                Scene scene = new Scene(root, 600, 400); // you can specify preferred scene dimensions (e.g., 600x400 here)
+                Scene scene = new Scene(root, 600, 600); // you can specify preferred scene dimensions (e.g., 600x400 here)
 
                 // Get current stage and set the new scene onto it
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -110,7 +110,7 @@ public class HomeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/events-view.fxml"));
                 Parent root = loader.load();
                 // Create a new scene
-                Scene scene = new Scene(root, 600, 400); // you can specify preferred scene dimensions (e.g., 600x400 here)
+                Scene scene = new Scene(root, 600, 600); // you can specify preferred scene dimensions (e.g., 600x400 here)
 
                 // Get current stage and set the new scene onto it
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -133,7 +133,7 @@ public class HomeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/event-tracking-chart.fxml"));
                 Parent root = loader.load();
                 // Create a new scene
-                Scene scene = new Scene(root, 600, 400); // you can specify preferred scene dimensions (e.g., 600x400 here)
+                Scene scene = new Scene(root, 600, 600); // you can specify preferred scene dimensions (e.g., 600x400 here)
 
                 // Get current stage and set the new scene onto it
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -156,7 +156,7 @@ public class HomeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/financial-view.fxml"));
                 Parent root = loader.load();
                 // Create a new scene
-                Scene scene = new Scene(root, 600, 400); // you can specify preferred scene dimensions (e.g., 600x400 here)
+                Scene scene = new Scene(root, 600, 600); // you can specify preferred scene dimensions (e.g., 600x400 here)
 
                 // Get current stage and set the new scene onto it
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -179,7 +179,7 @@ public class HomeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/users-view.fxml"));
                 Parent root = loader.load();
                 // Create a new scene
-                Scene scene = new Scene(root, 600, 400); // you can specify preferred scene dimensions (e.g., 600x400 here)
+                Scene scene = new Scene(root, 600, 600); // you can specify preferred scene dimensions (e.g., 600x400 here)
 
                 // Get current stage and set the new scene onto it
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -202,7 +202,7 @@ public class HomeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/generate-reports.fxml"));
                 Parent root = loader.load();
 
-                Scene scene = new Scene(root, 600, 400);
+                Scene scene = new Scene(root, 600, 600);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(scene);

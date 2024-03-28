@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.DatePicker?>
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.clubeventmanagementprogram.controller.FinancialTransactionActions.AddTransactionController">
-    <Label text="Transaction Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <TextField fx:id="transactionNameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.clubeventmanagementprogram.controller.FinancialTransactionActions.AddTransactionController">
+    <Label text="Transaction Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <TextField fx:id="transactionNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-    <Label text="Transaction Description:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextArea fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label text="Transaction Description:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextArea fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-    <Label text="Transaction Amount" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextField fx:id="transactionAmountField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label text="Transaction Amount" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField fx:id="transactionAmountField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-    <Label text="Transaction Date" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-    <DatePicker fx:id="transactionDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Label text="Transaction Date" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <DatePicker fx:id="transactionDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-    <Button fx:id="addButton" text="Save" onAction="#handleSaveAction" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-    <Button fx:id="cancelButton" onAction="#loadTransactionScene" text="Cancel" layoutX="20" layoutY="20"/>
+    <Button fx:id="addButton" layoutX="20" layoutY="20" onAction="#handleSaveAction" text="Save" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Button fx:id="cancelButton" layoutX="200" layoutY="20" onAction="#loadTransactionScene" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>

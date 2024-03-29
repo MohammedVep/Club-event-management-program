@@ -65,9 +65,15 @@ public class LogoutUtils {
     public static void resetUserViews(TextField usernameTextField, PasswordField passwordField, ListView<String> userListView) {
         // run on UI thread
         Platform.runLater(() -> {
-            usernameTextField.clear();
-            passwordField.clear();
-            userListView.getItems().clear();
+            if(usernameTextField != null) {
+                usernameTextField.clear();
+            }
+            if(passwordField != null){
+                passwordField.clear();
+            }
+            if(userListView != null){
+                userListView.getItems().clear();
+            }
             // Clear or reset other view components that may be holding or displaying data related to the current user
         });
     }

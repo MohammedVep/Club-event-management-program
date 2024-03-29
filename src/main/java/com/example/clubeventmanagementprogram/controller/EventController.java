@@ -2,7 +2,6 @@ package com.example.clubeventmanagementprogram.controller;
 
 import com.example.clubeventmanagementprogram.controller.eventActions.DeleteEventController;
 import com.example.clubeventmanagementprogram.controller.eventActions.EditEventController;
-import com.example.clubeventmanagementprogram.dao.EventDAO;
 import com.example.clubeventmanagementprogram.model.Event;
 import com.example.clubeventmanagementprogram.service.EventService;
 import com.example.clubeventmanagementprogram.utils.Context;

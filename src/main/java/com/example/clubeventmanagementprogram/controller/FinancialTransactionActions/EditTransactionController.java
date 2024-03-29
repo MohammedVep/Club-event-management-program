@@ -16,9 +16,7 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
+
 public class EditTransactionController {
 
     @FXML

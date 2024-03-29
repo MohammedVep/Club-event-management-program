@@ -1,4 +1,5 @@
 package com.example.clubeventmanagementprogram.controller.clubActions;
+
 import com.example.clubeventmanagementprogram.dao.ClubDAO;
 import com.example.clubeventmanagementprogram.model.Club;
 import com.example.clubeventmanagementprogram.service.ClubService;
@@ -15,8 +16,6 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class EditClubController{
 

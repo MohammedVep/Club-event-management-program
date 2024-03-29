@@ -71,6 +71,7 @@ public class RegistrationController {
             Parent homePageParent = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
             Scene homePageScene = new Scene(homePageParent);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            appStage.setTitle("Main Menu");
             appStage.setScene(homePageScene);
             appStage.show();
         } catch (Exception e) {

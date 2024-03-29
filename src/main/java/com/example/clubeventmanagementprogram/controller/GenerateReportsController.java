@@ -2,14 +2,12 @@ package com.example.clubeventmanagementprogram.controller;
 
 import com.example.clubeventmanagementprogram.dao.FinancialTransactionDAO;
 import com.example.clubeventmanagementprogram.model.FinancialTransaction;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -20,7 +18,6 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 public class GenerateReportsController {
 

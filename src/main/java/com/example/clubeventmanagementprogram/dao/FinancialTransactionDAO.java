@@ -5,6 +5,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 public class FinancialTransactionDAO {
     private static final String URL = "jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres";
     private static final String USERNAME = "edb_admin";

@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 public class Club implements Serializable {
     private int id;

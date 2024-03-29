@@ -1,4 +1,5 @@
 package com.example.clubeventmanagementprogram.service;
+
 import com.example.clubeventmanagementprogram.dao.UserDAO;
 import com.example.clubeventmanagementprogram.model.User;
 

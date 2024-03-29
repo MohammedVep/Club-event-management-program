@@ -1,10 +1,10 @@
 package com.example.clubeventmanagementprogram.dao;
 
-
 import com.example.clubeventmanagementprogram.model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 public class UserDAO {
     private static final String URL = "jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres";
     private static final String USERNAME = "edb_admin";

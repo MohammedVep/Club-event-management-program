@@ -29,7 +29,7 @@ public class NavigationController {
             RegistrationController registrationController = loader.getController();
             registrationController.setUserService(userService);
             registrationController.setUsers(users);
-
+            mainStage.setTitle("Register");
             mainStage.setScene(new Scene(root));
             mainStage.show();
         } catch (IOException e) {
@@ -44,6 +44,7 @@ public class NavigationController {
             LoginController loginController = loader.getController();
             loginController.setUserService(userService);
             loginController.setUsers(users);
+            mainStage.setTitle("Login");
             mainStage.setScene(new Scene(root));
             mainStage.show();
         } catch (IOException e) {

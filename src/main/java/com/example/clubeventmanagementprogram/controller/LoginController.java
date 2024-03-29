@@ -61,6 +61,7 @@ public class LoginController {
 
                     //Get the current stage and set the scene, then show the stage.
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setTitle("Main Menu");
                     window.setScene(homeScene);
                     window.show();
                 } catch (IOException e) {

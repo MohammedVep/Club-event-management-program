@@ -1,11 +1,7 @@
 package com.example.clubeventmanagementprogram.controller;
 
-import com.example.clubeventmanagementprogram.controller.eventActions.DeleteEventController;
-import com.example.clubeventmanagementprogram.controller.eventActions.EditEventController;
 import com.example.clubeventmanagementprogram.controller.userActions.DeleteUserController;
 import com.example.clubeventmanagementprogram.controller.userActions.EditUserController;
-import com.example.clubeventmanagementprogram.dao.UserDAO;
-import com.example.clubeventmanagementprogram.model.Event;
 import com.example.clubeventmanagementprogram.model.User;
 import com.example.clubeventmanagementprogram.service.UserService;
 import com.example.clubeventmanagementprogram.utils.Context;
@@ -23,8 +19,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.cell.CheckBoxTableCell;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 import static com.example.clubeventmanagementprogram.utils.Context.userService;

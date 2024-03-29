@@ -3,8 +3,6 @@ package com.example.clubeventmanagementprogram.controller.userActions;
 import com.example.clubeventmanagementprogram.controller.IUserUpdatable;
 import com.example.clubeventmanagementprogram.dao.UserDAO;
 import com.example.clubeventmanagementprogram.model.User;
-import com.example.clubeventmanagementprogram.service.EventService;
-import com.example.clubeventmanagementprogram.service.EventServiceImpl;
 import com.example.clubeventmanagementprogram.service.UserService;
 import com.example.clubeventmanagementprogram.service.UserServiceImpl;
 import javafx.collections.ObservableList;

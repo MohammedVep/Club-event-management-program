@@ -17,10 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.CheckBoxTableCell;
-import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
 import static com.example.clubeventmanagementprogram.utils.Context.clubService;

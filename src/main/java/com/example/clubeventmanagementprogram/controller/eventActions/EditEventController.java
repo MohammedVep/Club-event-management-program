@@ -17,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class EditEventController {
 

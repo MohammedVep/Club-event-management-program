@@ -26,7 +26,7 @@ public class HomeController {
     public static int getUserId(String username) {
         String getUserIdQuery = "SELECT user_id FROM users WHERE username = ?";
         int userId = -1; // default to an invalid ID
-        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres", "postgres", "password_here");
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://p-5mcdvllaz4.pg.biganimal.io:5432/postgres", "edb_admin", "Rlo:On)YMYtL%Ob");
              PreparedStatement getUserIdStmt = conn.prepareStatement(getUserIdQuery)) {
 
             getUserIdStmt.setString(1, username);

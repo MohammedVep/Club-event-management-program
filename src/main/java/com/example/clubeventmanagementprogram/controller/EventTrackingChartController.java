@@ -67,13 +67,13 @@ public class EventTrackingChartController {
         try {
             // Load the home screen
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
-            Scene loginScene = new Scene(fxmlLoader.load());
+            Scene homeScene = new Scene(fxmlLoader.load());
 
             // Get the current stage
             currentStage = (Stage) source.getScene().getWindow();
-
+            currentStage.setTitle("Main Menu");
             // Set the home scene to the current stage
-            currentStage.setScene(loginScene);
+            currentStage.setScene(homeScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,7 +90,7 @@ public class EventTrackingChartController {
 
             // Get the current stage
             currentStage = (Stage) source.getScene().getWindow();
-
+            currentStage.setTitle("Login");
             // Set the login scene to the current stage
             currentStage.setScene(loginScene);
         } catch (IOException e) {

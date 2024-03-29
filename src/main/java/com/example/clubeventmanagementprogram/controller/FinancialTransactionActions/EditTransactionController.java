@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -97,7 +94,17 @@ public class EditTransactionController {
             currentTransaction.setTransactionName(transactionNameField.getText());
             currentTransaction.setDate(transactionDatePicker.getValue());
             currentTransaction.setDescription(descriptionField.getText());
-            currentTransaction.setTransactionAmount(Double.parseDouble(transactionAmountField.getText()));
+            try {
+                currentTransaction.setTransactionAmount(Double.parseDouble(transactionAmountField.getText()));
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Input Error");
+                alert.setHeaderText("Invalid transaction amount");
+                alert.setContentText("Please enter a valid number for the transaction amount.");
+                alert.showAndWait();
+
+                return;
+            }
 
             FinancialTransactionService financialTransactionService = new FinancialTransactionServiceImpl(financialTransactionDao);
             financialTransactionService.updateTransaction(currentTransaction);

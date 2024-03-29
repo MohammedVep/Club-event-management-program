@@ -13,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -105,13 +102,13 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
         try {
             // Load the home screen
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
-            Scene loginScene = new Scene(fxmlLoader.load());
+            Scene homeScene = new Scene(fxmlLoader.load());
 
             // Get the current stage
             currentStage = (Stage) source.getScene().getWindow();
-
+            currentStage.setTitle("Main Menu");
             // Set the home scene to the current stage
-            currentStage.setScene(loginScene);
+            currentStage.setScene(homeScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,7 +124,7 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
 
             // Get the current stage
             currentStage = (Stage) source.getScene().getWindow();
-
+            currentStage.setTitle("Login");
             // Set the login scene to the current stage
             currentStage.setScene(loginScene);
         } catch (IOException e) {
@@ -145,6 +142,7 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
 
             // Get the current stage and set the scene to add-transaction
             Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setTitle("Add Transaction");
             currentStage.setScene(addFinancialTransactionScene);
 
         } catch(IOException e) {
@@ -165,9 +163,14 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
             if(currentFinancialTransaction != null){
                 editTransactionController.setCurrentFinancialTransaction(currentFinancialTransaction);
                 Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                currentStage.setTitle("Edit Transaction");
                 currentStage.setScene(new Scene(editFinancialTransactionRoot));
             } else {
-                System.err.println("No transaction was selected");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Selection Error");
+                alert.setHeaderText("No Transaction Selected");
+                alert.setContentText("Please select a transaction to edit.");
+                alert.showAndWait();
             }
 
         } catch(IOException e){
@@ -177,6 +180,14 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
     }
     @FXML
     private void handleDeleteFinancialTransaction(ActionEvent event){
+        currentFinancialTransaction = financialTransactionTableView.getSelectionModel().getSelectedItem();
+        if (currentFinancialTransaction == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Selection Error");
+            alert.setHeaderText("No Transaction Selected");
+            alert.setContentText("Please select a transaction to delete.");
+            alert.showAndWait();
+        }
         Node source = (Node) event.getSource();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/delete-transaction.fxml"));
@@ -185,6 +196,7 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
             Parent deleteFinancialTransactionRoot = loader.load();
             Scene deleteFinancialTransactionScene = new Scene(deleteFinancialTransactionRoot);
             Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setTitle("Delete Transaction");
             currentStage.setScene(deleteFinancialTransactionScene);
 
         } catch(IOException e){

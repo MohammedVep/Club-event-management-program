@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -74,7 +71,18 @@ public class AddTransactionController {
             String transactionName = transactionNameField.getText();
             LocalDate transactionDate = transactionDatePicker.getValue();
             String description = descriptionField.getText();
-            double transactionAmount = Double.parseDouble(transactionAmountField.getText());
+            double transactionAmount;
+            try{
+                transactionAmount = Double.parseDouble(transactionAmountField.getText());
+            } catch (NumberFormatException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Input Error");
+                alert.setHeaderText("Invalid transaction amount");
+                alert.setContentText("Please enter a valid number for the transaction amount.");
+                alert.showAndWait();
+
+                return;
+            }
             List<FinancialTransaction> financialTransactionsFromDb = financialTransactionService.getAllFinancialTransactions();
             int financialTransactionId = financialTransactionsFromDb.size() + 1;
             FinancialTransaction newTransaction = new FinancialTransaction(financialTransactionId, transactionName, transactionDate, description, transactionAmount);

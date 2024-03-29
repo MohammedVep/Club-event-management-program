@@ -19,7 +19,6 @@
                 <TableColumn fx:id="clubNameColumn" prefWidth="150.0" text="Club name" />
                 <TableColumn fx:id="descriptionColumn" prefWidth="200.0" text="Club Description" />
                 <TableColumn fx:id="topicsColumn" prefWidth="150.0" text="Topics" />
-                <TableColumn fx:id="dateAddedColumn" prefWidth="100.0" text="Date Added" />
             </columns>
         </TableView>
         <Button fx:id="addButton" layoutX="10.0" layoutY="400.0" mnemonicParsing="false" text="Add Club" onAction="#handleAddClub" />

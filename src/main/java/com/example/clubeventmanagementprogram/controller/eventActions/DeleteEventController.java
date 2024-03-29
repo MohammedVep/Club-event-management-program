@@ -61,7 +61,7 @@ public class DeleteEventController {
                 throw new RuntimeException(e);
             }
         } else {
-            System.out.println("No Club selected in the table.");
+            System.out.println("No Event selected in the table.");
         }
     }
 

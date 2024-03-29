@@ -99,6 +99,7 @@ public class GenerateReportsController {
             Scene scene = new Scene(root);
 
             Stage stage = (Stage) noButton.getScene().getWindow();
+            stage.setTitle("Main Menu");
             stage.setScene(scene);
         } catch (IOException e) {
             System.err.println("Failed to load the home page: " + e.getMessage());

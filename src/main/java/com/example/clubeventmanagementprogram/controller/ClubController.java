@@ -13,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -53,8 +50,6 @@ public class ClubController implements IClubUpdatable{
     private TableColumn<Club, String> descriptionColumn;
     @FXML
     private TableColumn<Club, String> topicsColumn;
-    @FXML
-    private TableColumn<Club, LocalDate> dateAddedColumn;
 
     @FXML
     private Button addButton;                 // Place the 'Add' button below the table
@@ -118,13 +113,13 @@ public class ClubController implements IClubUpdatable{
         try {
             // Load the home screen
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
-            Scene loginScene = new Scene(fxmlLoader.load());
+            Scene homeScene = new Scene(fxmlLoader.load());
 
             // Get the current stage
             currentStage = (Stage) source.getScene().getWindow();
-
+            currentStage.setTitle("Main Menu");
             // Set the home scene to the current stage
-            currentStage.setScene(loginScene);
+            currentStage.setScene(homeScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -141,7 +136,7 @@ public class ClubController implements IClubUpdatable{
 
             // Get the current stage
             currentStage = (Stage) source.getScene().getWindow();
-
+            currentStage.setTitle("Login");
             // Set the login scene to the current stage
             currentStage.setScene(loginScene);
         } catch (IOException e) {
@@ -158,6 +153,7 @@ public class ClubController implements IClubUpdatable{
 
             // Get the current stage and set the scene to add-club
             Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setTitle("Add Club");
             currentStage.setScene(addClubScene);
 
         } catch(IOException e) {
@@ -183,10 +179,15 @@ public class ClubController implements IClubUpdatable{
             if(currentClub != null) {
                 editClubController.setCurrentClub(currentClub);
                 Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                currentStage.setTitle("Edit club");
                 currentStage.setScene(new Scene(editClubRoot));
             } else {
                 // Show some error message to the user or write some error log
-                System.err.println("No club was selected");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Selection Error");
+                alert.setHeaderText("No Club Selected");
+                alert.setContentText("Please select a club to edit.");
+                alert.showAndWait();
             }
         } catch(IOException e){
             System.err.println("Error loading Edit Club page");
@@ -196,6 +197,15 @@ public class ClubController implements IClubUpdatable{
 
     @FXML
     private void handleDeleteClub(ActionEvent event) {
+        currentClub = clubTableView.getSelectionModel().getSelectedItem();
+        if(currentClub == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Selection Error");
+            alert.setHeaderText("No Club Selected");
+            alert.setContentText("Please select a club to delete.");
+            alert.showAndWait();
+            return;
+        }
         Node source = (Node) event.getSource();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/delete-club.fxml"));
@@ -204,6 +214,7 @@ public class ClubController implements IClubUpdatable{
             Parent deleteClubRoot = loader.load();
             Scene deleteClubScene = new Scene(deleteClubRoot);
             Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setTitle("Delete Club");
             currentStage.setScene(deleteClubScene);
         } catch(IOException e){
             System.err.println("Error loading Delete Club page");

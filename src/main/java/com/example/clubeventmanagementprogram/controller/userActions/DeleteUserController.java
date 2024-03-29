@@ -62,7 +62,7 @@ public class DeleteUserController {
                 throw new RuntimeException(e);
             }
         } else {
-            System.out.println("No Club selected in the table.");
+            System.out.println("No User selected in the table.");
         }
     }
 

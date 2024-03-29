@@ -14,10 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -118,7 +115,7 @@ public class EventController implements IEventUpdatable{
 
             // Get the current stage
             currentStage = (Stage) source.getScene().getWindow();
-
+            currentStage.setTitle("Login");
             // Set the login scene to the current stage
             currentStage.setScene(loginScene);
         } catch (IOException e) {
@@ -132,13 +129,14 @@ public class EventController implements IEventUpdatable{
         try {
             // Load the home screen
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/home-view.fxml"));
-            Scene loginScene = new Scene(fxmlLoader.load());
+            Scene homeScene = new Scene(fxmlLoader.load());
 
             // Get the current stage
             currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setTitle("Main Menu");
 
             // Set the home scene to the current stage
-            currentStage.setScene(loginScene);
+            currentStage.setScene(homeScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -147,12 +145,13 @@ public class EventController implements IEventUpdatable{
     private void handleAddEvent(ActionEvent event) {
         Node source = (Node) event.getSource();
         try {
-            // Load the add-club view
+            // Load the add-event view
             Parent addEventRoot = FXMLLoader.load(getClass().getResource("/com/example/clubeventmanagementprogram/add-event.fxml"));
             Scene addEventScene = new Scene(addEventRoot);
 
-            // Get the current stage and set the scene to add-club
+            // Get the current stage and set the scene to add-event
             Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setTitle("Add Event");
             currentStage.setScene(addEventScene);
 
         } catch(IOException e) {
@@ -174,14 +173,19 @@ public class EventController implements IEventUpdatable{
 
             EditEventController editEventController = loader.getController();
             editEventController.setEventUpdatable(this);
-            // Get currently selected club and pass it to the EditClubController
+            // Get currently selected club and pass it to the EditEventController
             if(currentEvent != null) {
                 editEventController.setCurrentEvent(currentEvent);
                 Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                currentStage.setTitle("Edit Event");
                 currentStage.setScene(new Scene(editClubRoot));
             } else {
                 // Show some error message to the user or write some error log
-                System.err.println("No event was selected");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Selection Error");
+                alert.setHeaderText("No Event Selected");
+                alert.setContentText("Please select a event to edit.");
+                alert.showAndWait();
             }
         } catch(IOException e){
             System.err.println("Error loading Edit Event page");
@@ -191,6 +195,16 @@ public class EventController implements IEventUpdatable{
 
     @FXML
     private void handleDeleteEvent(ActionEvent event) {
+        currentEvent = eventTableView.getSelectionModel().getSelectedItem();
+        if(currentEvent == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Selection Error");
+            alert.setHeaderText("No Event Selected");
+            alert.setContentText("Please select a event to delete.");
+            alert.showAndWait();
+            return;
+        }
+
         Node source = (Node) event.getSource();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clubeventmanagementprogram/delete-event.fxml"));
@@ -199,6 +213,7 @@ public class EventController implements IEventUpdatable{
             Parent deleteEventRoot = loader.load();
             Scene deleteEventScene = new Scene(deleteEventRoot);
             Stage currentStage = (Stage) source.getScene().getWindow();
+            currentStage.setTitle("Delete Event");
             currentStage.setScene(deleteEventScene);
         } catch(IOException e){
             System.err.println("Error loading Delete Event page");

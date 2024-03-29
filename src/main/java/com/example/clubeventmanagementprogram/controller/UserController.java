@@ -3,6 +3,7 @@ package com.example.clubeventmanagementprogram.controller;
 import com.example.clubeventmanagementprogram.controller.userActions.DeleteUserController;
 import com.example.clubeventmanagementprogram.controller.userActions.EditUserController;
 import com.example.clubeventmanagementprogram.model.User;
+import com.example.clubeventmanagementprogram.service.AuthenticationService;
 import com.example.clubeventmanagementprogram.service.UserService;
 import com.example.clubeventmanagementprogram.utils.Context;
 import javafx.collections.FXCollections;
@@ -25,6 +26,7 @@ import static com.example.clubeventmanagementprogram.utils.Context.userService;
 
 public class UserController implements IUserUpdatable{
 
+    private AuthenticationService authenticationService;
     @FXML
     private Label usernameLabel;
 
@@ -60,6 +62,10 @@ public class UserController implements IUserUpdatable{
 
     private User currentUser;
 
+    public UserController() {
+        this.authenticationService = new AuthenticationService();
+    }
+
     private ObservableList<User> userData = FXCollections.observableArrayList();
 
     @Override
@@ -81,6 +87,11 @@ public class UserController implements IUserUpdatable{
         editButton.setOnAction(event -> handleEditUser(event));
         deleteButton.setOnAction(event -> handleDeleteUser(event));
         backButton.setOnAction(event -> handleGoBack(event));
+        // Set up the username label text
+        User currentUser = authenticationService.getCurrentUser();
+        if(currentUser != null) {
+            usernameLabel.setText(currentUser.getUserName());
+        }
         checkBoxColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
         checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
         userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));

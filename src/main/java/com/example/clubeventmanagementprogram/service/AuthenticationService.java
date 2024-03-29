@@ -4,6 +4,7 @@ import com.example.clubeventmanagementprogram.dao.UserDAO;
 import com.example.clubeventmanagementprogram.model.User;
 
 public class AuthenticationService {
+    private static AuthenticationService instance;
     private UserDAO userDao;
     private User currentUser;
 
@@ -11,19 +12,22 @@ public class AuthenticationService {
         this.userDao = new UserDAO();
     }
 
+    public static AuthenticationService getInstance() {
+        if (instance == null) {
+            instance = new AuthenticationService();
+        }
+        return instance;
+    }
     public boolean authenticate(String username, String password) {
         User user = userDao.findByUsername(username);
 
-        if (user == null) {
-            return false; // User not found
+        if (user == null || !user.getPassword().equals(password)) {
+            return false; // User not found or password did not match
         }
 
-        // Verify that the password matches the one stored in the database
-        if (user.getPassword().equals(password)) { // don't store passwords as plain text!
-            return true; // Successful authentication
-        } else {
-            return false; // Password did not match
-        }
+        // We found a user and the password matches. Save this user as the current user.
+        currentUser = user;
+        return true; // Successful authentication
     }
 
     public User getCurrentUser() {

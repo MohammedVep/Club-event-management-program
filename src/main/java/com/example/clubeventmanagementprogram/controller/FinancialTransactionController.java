@@ -3,6 +3,8 @@ package com.example.clubeventmanagementprogram.controller;
 import com.example.clubeventmanagementprogram.controller.FinancialTransactionActions.DeleteTransactionController;
 import com.example.clubeventmanagementprogram.controller.FinancialTransactionActions.EditTransactionController;
 import com.example.clubeventmanagementprogram.model.FinancialTransaction;
+import com.example.clubeventmanagementprogram.model.User;
+import com.example.clubeventmanagementprogram.service.AuthenticationService;
 import com.example.clubeventmanagementprogram.service.FinancialTransactionService;
 import com.example.clubeventmanagementprogram.utils.Context;
 import javafx.collections.FXCollections;
@@ -24,6 +26,8 @@ import java.util.List;
 import static com.example.clubeventmanagementprogram.utils.Context.financialTransactionService;
 
 public class FinancialTransactionController implements IFinancialTransactionUpdatable{
+
+    private AuthenticationService authenticationService;
     @FXML
     private Label usernameLabel;
 
@@ -65,6 +69,9 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
 
     private ObservableList<FinancialTransaction> financialTransactionData = FXCollections.observableArrayList();
 
+    public FinancialTransactionController(){
+        this.authenticationService = new AuthenticationService();
+    }
     @Override
     public void updateFinancialTransactionTable(){
         financialTransactionData.clear();
@@ -83,6 +90,12 @@ public class FinancialTransactionController implements IFinancialTransactionUpda
         editButton.setOnAction(event -> handleEditFinancialTransaction(event));
         deleteButton.setOnAction(event -> handleDeleteFinancialTransaction(event));
         backButton.setOnAction(event -> handleGoBack(event));
+
+        // Set up the username label text
+        User currentUser = authenticationService.getCurrentUser();
+        if(currentUser != null) {
+            usernameLabel.setText(currentUser.getUserName());
+        }
         // Set cell value factory
         checkboxColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
 // Set cell factory

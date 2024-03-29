@@ -3,6 +3,8 @@ package com.example.clubeventmanagementprogram.controller;
 import com.example.clubeventmanagementprogram.controller.clubActions.DeleteClubController;
 import com.example.clubeventmanagementprogram.controller.clubActions.EditClubController;
 import com.example.clubeventmanagementprogram.model.Club;
+import com.example.clubeventmanagementprogram.model.User;
+import com.example.clubeventmanagementprogram.service.AuthenticationService;
 import com.example.clubeventmanagementprogram.service.ClubService;
 import com.example.clubeventmanagementprogram.utils.Context;
 import javafx.collections.FXCollections;
@@ -24,6 +26,8 @@ import java.util.List;
 import static com.example.clubeventmanagementprogram.utils.Context.clubService;
 
 public class ClubController implements IClubUpdatable{
+
+    private AuthenticationService authenticationService;
 
     @FXML
     private Label usernameLabel;              // Display the Username at the upper left corner
@@ -54,8 +58,7 @@ public class ClubController implements IClubUpdatable{
     @FXML
     private Button editButton;                // Place the 'Edit' button below the table
     @FXML
-    private Button deleteButton;              // Place the 'Delete' button below the table
-
+    private Button deleteButton; // Place the 'Delete' button below the table
 
     private Club currentClub;   // declare it here
 
@@ -69,6 +72,20 @@ public class ClubController implements IClubUpdatable{
 
         // Add the updated list to the observable list
         clubData.addAll(updatedList);
+    }
+
+    public ClubController() {
+        this.authenticationService = new AuthenticationService();
+    }
+
+    public void updateUIAfterLogin(){
+        // Set up the username label text
+        User currentUser = authenticationService.getCurrentUser();
+        if(currentUser != null) {
+            usernameLabel.setText(currentUser.getUserName());
+        } else {
+            usernameLabel.setText("User");
+        }
     }
 
     // Bind properties to the club data and setup Actions.

@@ -1,8 +1,8 @@
 package com.example.clubeventmanagementprogram.controller;
+
 import com.example.clubeventmanagementprogram.model.User;
 import com.example.clubeventmanagementprogram.service.AuthenticationService;
 import com.example.clubeventmanagementprogram.service.UserService;
-import com.example.clubeventmanagementprogram.service.UserServiceImpl;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +32,7 @@ public class LoginController {
 
 
     public void initialize() {
-        authService = new AuthenticationService();
+        authService = AuthenticationService.getInstance();
         setupButtonActions();
     }
     public void setNavigationController(NavigationController navigationController) {

@@ -1,5 +1,6 @@
 package com.example.clubeventmanagementprogram.controller;
 
+import com.example.clubeventmanagementprogram.model.User;
 import com.example.clubeventmanagementprogram.utils.LogoutUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -48,8 +49,11 @@ public class HomeController {
     private AuthenticationService authService;
     public void initialize() {
         authService = new AuthenticationService();
-        String currentUser = (authService.getCurrentUser()!=null) ? authService.getCurrentUser().getUserName() : "User";
-        usernameLabel.setText(currentUser);
+        // Set up the username label text
+        User currentUser = authService.getCurrentUser();
+        if(currentUser != null) {
+            usernameLabel.setText(currentUser.getUserName());
+        }
         setupButtonActions();
     }
 

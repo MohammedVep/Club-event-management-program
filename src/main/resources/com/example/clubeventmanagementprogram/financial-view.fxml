@@ -6,7 +6,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clubeventmanagementprogram.controller.FinancialTransactionController">
     <children>
-        <Label fx:id="usernameLabel" layoutX="10.0" layoutY="10.0" text="User"/>
+        <Label fx:id="usernameLabel" layoutX="10.0" layoutY="10.0"/>
         <Label fx:id="manageFinancialTransactionsLabel" layoutX="275.0" layoutY="10.0" text="Manage Financial Transaction"/>
         <Button fx:id="logoutButton" layoutX="450.0" layoutY="10.0" mnemonicParsing="false" text="Logout" onAction="#handleLogout"/>
         <Button fx:id="backButton" layoutX="100.0" layoutY="10.0" text="Go back" mnemonicParsing="false" onAction="#handleGoBack" />
